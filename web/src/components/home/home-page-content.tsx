@@ -1,14 +1,12 @@
 "use client";
 
-import Link from "next/link";
+import { useRef } from "react";
 import { BolShell } from "@/components/layout/bol-shell";
-import { ArticleListItem, ArticleTile } from "@/components/news/article-tile";
+import { HomeSidebarWidgets } from "@/components/home/home-sidebar-widgets";
+import { ArticleTile } from "@/components/news/article-tile";
 import { BettingResourcesSection } from "@/components/news/betting-resources-section";
 import { NewsCarouselSection } from "@/components/news/library/news-carousel-section";
-import { LeagueStandings } from "@/components/news/widgets/league-standings";
-import { categoryPath } from "@/lib/article-url";
 import type { NewsSettings } from "@/lib/sanity/news-settings";
-import { STANDINGS_BY_LEAGUE } from "@/lib/sports-widgets/data";
 import type { ArticleCard, HomepageArticles } from "@/lib/sanity/types";
 
 type HomePageContentProps = {
@@ -40,13 +38,13 @@ export function HomePageContent({
   articles,
   sanityProject,
 }: HomePageContentProps) {
+  const carouselBoundaryRef = useRef<HTMLElement>(null);
   const { featured, latest, popular } = articles;
   const hasArticles = Boolean(featured || latest.length || popular.length);
 
   const storyPool = buildStoryPool(featured, latest);
   const heroArticle = storyPool[0] ?? null;
 
-  // Slice-based sections — small catalogs still fill every rail (overlap is fine on news homepages).
   const topGridArticles = storyPool.slice(1, 5);
   const leadStories = storyPool.slice(1, 9);
   const carouselArticles = (popular.length > 0 ? popular : storyPool).slice(0, 8);
@@ -103,8 +101,8 @@ export function HomePageContent({
               </section>
             ) : null}
 
-            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:gap-12">
-              <main className="min-w-0">
+            <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12">
+              <main className="min-w-0 flex-1">
                 <div className="mb-5 border-b border-[var(--ds-content-card-border,#e5e5e5)] pb-3">
                   <h2 className="font-serif text-2xl text-[var(--ds-content-foreground,#0a0a0a)] md:text-[2rem] [text-wrap:balance]">
                     Latest news
@@ -124,53 +122,21 @@ export function HomePageContent({
                 )}
               </main>
 
-              <aside className="min-w-0 space-y-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-y-auto lg:overscroll-contain">
-                <div>
-                  <h3 className="mb-4 border-b border-[var(--ds-content-card-border,#e5e5e5)] pb-3 font-serif text-lg text-[var(--ds-content-foreground,#0a0a0a)]">
-                    Most read
-                  </h3>
-                  <div className="flex flex-col gap-1">
-                    {popular.map((article) => (
-                      <ArticleListItem
-                        key={article._id}
-                        article={article}
-                        variant="popular"
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <LeagueStandings table={STANDINGS_BY_LEAGUE.nfl} compact />
-
-                <div className="rounded-xl border border-[var(--ds-content-card-border,#e5e5e5)] bg-[var(--ds-content-surface,#f5f5f5)] p-4">
-                  <h3 className="mb-3 font-serif text-lg text-[var(--ds-content-foreground,#0a0a0a)]">
-                    Browse by sport
-                  </h3>
-                  <ul className="space-y-2 text-sm">
-                    {[
-                      { label: "NFL", slug: "nfl" },
-                      { label: "NBA", slug: "nba" },
-                      { label: "Expert Analysis", slug: "expert-analysis" },
-                    ].map((item) => (
-                      <li key={item.slug}>
-                        <Link
-                          href={categoryPath(item.slug)}
-                          className="font-medium text-[var(--ds-content-foreground,#0a0a0a)] transition-colors hover:text-[var(--ds-primary,#ee3536)]"
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <aside className="min-w-0 lg:w-[17.5rem] lg:shrink-0 lg:self-start">
+                <HomeSidebarWidgets
+                  popular={popular}
+                  scrollBoundaryRef={carouselBoundaryRef}
+                />
               </aside>
             </div>
 
             {carouselArticles.length > 0 ? (
               <NewsCarouselSection
+                ref={carouselBoundaryRef}
                 kicker="Trending"
                 title="More coverage"
                 articles={carouselArticles}
+                className="my-0"
               />
             ) : null}
 

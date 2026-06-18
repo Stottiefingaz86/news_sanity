@@ -41,7 +41,7 @@ function BolShellInner({
   return (
     <div
       data-page-bg
-      className="min-h-screen w-full overflow-x-clip font-sans"
+      className="w-full overflow-x-clip font-sans"
       style={{ backgroundColor: "var(--ds-nav-bg, #2D2E2C)" }}
     >
       <div className="dark" data-bol-chrome>
@@ -52,7 +52,7 @@ function BolShellInner({
         {!isMobile ? (
           <div
             aria-hidden
-            className="fixed top-0 left-0 z-[101] h-screen border-r border-white/10 transition-[width] duration-200 ease-linear"
+            className="fixed top-0 left-0 z-[101] h-dvh border-r border-white/10 transition-[width] duration-200 ease-linear"
             style={{
               width: sidebarOpen ? "16rem" : "3rem",
               backgroundColor: "var(--ds-sidebar-bg, #2d2d2d)",
@@ -67,7 +67,7 @@ function BolShellInner({
           data-content-area
           data-content-theme={contentTheme}
           className={cn(
-            "flex min-h-[calc(100vh-4rem)] min-w-0 flex-1 flex-col",
+            "flex min-w-0 flex-1 flex-col",
             contentTheme === "dark" && "dark",
           )}
           style={{
@@ -93,7 +93,7 @@ function BolShellInner({
             stickyOffset={showSubNav ? 52 : 0}
             activeSectionSlug={activeSectionSlug}
           />
-          <div className="min-w-0 flex-1 text-[var(--ds-content-foreground,#0a0a0a)]">
+          <div className="min-w-0 pb-20 text-[var(--ds-content-foreground,#0a0a0a)] md:pb-0">
             {children}
           </div>
           <div className="dark" data-bol-chrome>

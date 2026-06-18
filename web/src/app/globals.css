@@ -363,10 +363,12 @@ main[data-sidebar="inset"] {
   }
 }
 
-/* All sidebars: full height, flush with top of viewport */
-.group.peer > div.fixed {
-  top: 0 !important;
-  height: 100vh !important;
+/* All sidebars: full height, flush with top of viewport (desktop) */
+@media (min-width: 768px) {
+  .group.peer > div.fixed {
+    top: 0 !important;
+    height: 100dvh !important;
+  }
 }
 
 /* Fix sidebar feature items when collapsed - proper icon display and hidden text */

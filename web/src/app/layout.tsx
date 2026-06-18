@@ -37,7 +37,7 @@ export default function RootLayout({
       className={`${figtree.variable} ${sourceSerif.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">
+      <body className="min-h-0 flex flex-col">
         <ThemeProvider>
           <TooltipProvider>{children}</TooltipProvider>
           <Toaster position="top-right" />
