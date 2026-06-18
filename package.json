@@ -1,0 +1,15 @@
+{
+  "name": "bol-news",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix web",
+    "dev:web": "npm run dev --prefix web",
+    "dev:studio": "npm run dev --prefix studio-bol_news",
+    "build": "npm run build --prefix web",
+    "build:web": "npm run build --prefix web",
+    "build:studio": "npm run build --prefix studio-bol_news",
+    "lint": "npm run lint --prefix web",
+    "install:all": "npm install --prefix web && npm install --prefix studio-bol_news"
+  }
+}
