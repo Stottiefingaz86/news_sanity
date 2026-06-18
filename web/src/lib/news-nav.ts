@@ -57,31 +57,12 @@ export const newsLeagues: NewsLeague[] = [
   },
 ];
 
-/** Horizontal sub-nav destinations — editorial sections plus league sports news. */
+const worldCupIcon = assetPath("/logos/world-cup-2026.svg");
+
+export const WORLD_CUP_NEWS_HREF = "/category/world-cup";
+
+/** Site-wide horizontal sub-nav — same items and order on every page. */
 export const newsSectionNavItems: NewsSectionNavItem[] = [
-  { label: "Latest", slug: "latest", href: "/", kind: "home" },
-  {
-    label: "Expert Analysis",
-    slug: "expert-analysis",
-    href: "/category/expert-analysis",
-    kind: "editorial",
-  },
-  { label: "News", slug: "news", href: "/category/news", kind: "editorial" },
-  ...newsLeagues.map((league) => ({
-    label: league.label,
-    slug: league.slug,
-    href: league.href,
-    icon: league.icon,
-    kind: "league" as const,
-  })),
-];
-
-const worldCupIcon = assetPath("/banners/sports_league/copa.svg");
-
-export const WORLD_CUP_NEWS_HREF = "/ranking-10-teams-best-chance-win-world-cup";
-
-/** Homepage sub-nav — featured comp first, then sidebar leagues. */
-export const homeSectionNavItems: NewsSectionNavItem[] = [
   { label: "Latest", slug: "latest", href: "/", kind: "home" },
   {
     label: "World Cup 2026",
@@ -106,81 +87,38 @@ export const homeSectionNavItems: NewsSectionNavItem[] = [
   { label: "News", slug: "news", href: "/category/news", kind: "editorial" },
 ];
 
-function leagueSectionNavItems(league: NewsLeague): NewsSectionNavItem[] {
-  return [
-    {
-      label: "Overview",
-      slug: `${league.slug}-overview`,
-      href: league.href,
-      icon: league.icon,
-      kind: "league",
-    },
-    {
-      label: "Latest",
-      slug: `${league.slug}-latest`,
-      href: league.href,
-      kind: "editorial",
-    },
-    {
-      label: "Scores",
-      slug: `${league.slug}-scores`,
-      href: "/upcoming-games",
-      kind: "editorial",
-    },
-    {
-      label: "Standings",
-      slug: `${league.slug}-standings`,
-      href: league.href,
-      kind: "editorial",
-    },
-    {
-      label: "Picks & Props",
-      slug: `${league.slug}-picks`,
-      href: "/category/expert-analysis",
-      kind: "editorial",
-    },
-  ];
-}
-
 export function getLeagueSlugFromPathname(pathname: string) {
   const match = pathname.match(/^\/category\/([^/]+)/);
   return match?.[1] ?? null;
 }
 
-export function getNewsSectionNavConfig(pathname: string): {
+export function getNewsSectionNavConfig(): {
   heading: string;
   items: NewsSectionNavItem[];
 } {
-  if (pathname === "/" || pathname === "") {
-    return { heading: "In the News", items: homeSectionNavItems };
-  }
-
-  const leagueSlug = getLeagueSlugFromPathname(pathname);
-  if (leagueSlug) {
-    const league = newsLeagues.find((item) => item.slug === leagueSlug);
-    if (league) {
-      return { heading: league.label, items: leagueSectionNavItems(league) };
-    }
-  }
-
   return { heading: "In the News", items: newsSectionNavItems };
 }
 
-export function isNewsSectionNavActive(pathname: string, item: NewsSectionNavItem) {
+export function resolveActiveSectionSlug(categorySlugs?: string[]) {
+  if (!categorySlugs?.length) return undefined;
+
+  const slugSet = new Set(categorySlugs);
+  return newsSectionNavItems.find(
+    (item) => item.slug !== "latest" && slugSet.has(item.slug),
+  )?.slug;
+}
+
+export function isNewsSectionNavActive(
+  pathname: string,
+  item: NewsSectionNavItem,
+  activeSectionSlug?: string,
+) {
+  if (activeSectionSlug) {
+    return item.slug === activeSectionSlug;
+  }
+
   if (item.kind === "home") {
     return pathname === "/" || pathname === "";
-  }
-
-  if (item.slug.endsWith("-overview")) {
-    return pathname === item.href;
-  }
-
-  if (item.slug.endsWith("-latest") || item.slug.endsWith("-standings")) {
-    return false;
-  }
-
-  if (item.slug === "world-cup") {
-    return pathname.includes("ranking-10-teams-best-chance-win-world-cup");
   }
 
   return isNavItemActive(pathname, item.href);
@@ -243,6 +181,8 @@ export function isInTheNewsSection(pathname: string) {
   return (
     pathname === "/category/news" ||
     pathname.startsWith("/category/news/") ||
+    pathname === "/category/world-cup" ||
+    pathname.startsWith("/category/world-cup/") ||
     newsLeagues.some((league) => isNewsLeaguePath(pathname, league.slug))
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeftIcon } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -18,12 +19,14 @@ export type NewsBreadcrumbItem = {
 type NewsBreadcrumbsProps = {
   items: NewsBreadcrumbItem[];
   variant?: "default" | "compact" | "hero";
+  showBackArrow?: boolean;
   className?: string;
 };
 
 export function NewsBreadcrumbs({
   items,
   variant = "default",
+  showBackArrow = false,
   className,
 }: NewsBreadcrumbsProps) {
   if (!items.length) return null;
@@ -70,8 +73,14 @@ export function NewsBreadcrumbs({
                 ) : (
                   <BreadcrumbLink
                     render={<Link href={item.href} />}
-                    className={variant === "hero" ? "text-white/70 hover:text-white" : undefined}
+                    className={cn(
+                      variant === "hero" && "text-white/70 hover:text-white",
+                      showBackArrow && index === 0 && "inline-flex items-center gap-1.5",
+                    )}
                   >
+                    {showBackArrow && index === 0 ? (
+                      <ArrowLeftIcon className="size-4 shrink-0" aria-hidden />
+                    ) : null}
                     {item.label}
                   </BreadcrumbLink>
                 )}

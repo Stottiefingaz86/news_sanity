@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 type NewsSectionSubNavProps = {
   className?: string;
   stickyOffset?: number;
+  activeSectionSlug?: string;
 };
 
 function SectionNavChip({
@@ -86,9 +87,10 @@ function useHorizontalScrollState() {
 export function NewsSectionSubNav({
   className,
   stickyOffset = 0,
+  activeSectionSlug,
 }: NewsSectionSubNavProps) {
   const pathname = usePathname();
-  const { heading, items } = getNewsSectionNavConfig(pathname);
+  const { heading, items } = getNewsSectionNavConfig();
   const { ref, canScrollLeft, canScrollRight, scrollBy, update } =
     useHorizontalScrollState();
 
@@ -131,7 +133,7 @@ export function NewsSectionSubNav({
               <SectionNavChip
                 key={item.slug}
                 item={item}
-                active={isNewsSectionNavActive(pathname, item)}
+                active={isNewsSectionNavActive(pathname, item, activeSectionSlug)}
               />
             ))}
           </div>

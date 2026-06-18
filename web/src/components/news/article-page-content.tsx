@@ -7,6 +7,7 @@ import { ArticleTableOfContents } from "@/components/news/article-table-of-conte
 import { ScoreTicker } from "@/components/news/widgets/score-ticker";
 import { EditorialArticleLayout } from "@/components/news/layouts/editorial-article-layout";
 import { extractArticleHeadings } from "@/lib/extract-article-headings";
+import { resolveActiveSectionSlug } from "@/lib/news-nav";
 import type { NewsSettings } from "@/lib/sanity/news-settings";
 import type { ArticleDetail } from "@/lib/sanity/types";
 
@@ -36,6 +37,9 @@ export function ArticlePageContent({ article, settings }: ArticlePageContentProp
     <BolShell
       showSubNav={settings.showSubNav}
       subNavItems={settings.subNavItems}
+      activeSectionSlug={resolveActiveSectionSlug(
+        article.categories?.map((category) => category.slug),
+      )}
     >
       <div className="mx-auto w-full max-w-[1240px] px-4 py-8 md:px-8 lg:px-10">
         <ScoreTicker className="mb-8" />

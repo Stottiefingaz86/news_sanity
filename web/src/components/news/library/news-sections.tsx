@@ -18,7 +18,7 @@ export function NewsSectionHero({ article, className }: NewsSectionHeroProps) {
   return (
     <section
       className={cn(
-        "relative overflow-hidden rounded-2xl bg-[var(--ds-content-foreground,#0a0a0a)] px-6 py-10 text-white md:px-10 md:py-14",
+        "news-featured-hero relative overflow-hidden rounded-2xl px-6 py-10 md:px-10 md:py-14",
         className,
       )}
     >
@@ -44,7 +44,12 @@ export function NewsSectionHero({ article, className }: NewsSectionHeroProps) {
           </p>
         ) : null}
         <div className="mt-8">
-          <Button render={<Link href={articlePath(article.slug)} />}>Read article</Button>
+          <Button
+            render={<Link href={articlePath(article.slug)} />}
+            className="bg-white text-[var(--ds-content-emphasis-bg,#2d2d2d)] hover:bg-white/90"
+          >
+            Read article
+          </Button>
         </div>
       </div>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(238,53,54,0.25),transparent_55%)]" />

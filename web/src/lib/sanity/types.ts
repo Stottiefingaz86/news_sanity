@@ -5,7 +5,9 @@ export type ArticleLayout = "standard" | "analysis" | "longform" | "media";
 export type SanityImage = {
   asset?: {
     _ref?: string;
+    _id?: string;
     _type?: string;
+    url?: string;
   };
   alt?: string;
   hotspot?: {

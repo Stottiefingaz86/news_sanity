@@ -43,7 +43,7 @@ export const SCORE_GROUPS: ScoreGroup[] = [
   {
     id: "world-cup",
     label: "World Cup 2026",
-    moreHref: "/ranking-10-teams-best-chance-win-world-cup",
+    moreHref: "/category/world-cup",
     games: [
       {
         id: "wc-1",

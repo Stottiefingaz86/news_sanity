@@ -14,7 +14,7 @@ const LEAGUE_ICON_PATHS: Record<string, string> = {
   champions: assetPath("/banners/sports_league/champions.svg"),
   "champions-league": assetPath("/banners/sports_league/champions.svg"),
   copa: assetPath("/banners/sports_league/copa.svg"),
-  "world-cup": assetPath("/banners/sports_league/copa.svg"),
+  "world-cup": assetPath("/logos/world-cup-2026.svg"),
   f1: assetPath("/banners/sports_league/f1.svg"),
   racing: assetPath("/banners/sports_league/f1.svg"),
   tennis: assetPath("/banners/sports_league/ATP.svg"),

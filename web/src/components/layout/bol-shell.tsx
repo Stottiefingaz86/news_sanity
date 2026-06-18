@@ -20,6 +20,7 @@ type BolShellProps = {
   showSubNav?: boolean;
   subNavItems?: string[];
   defaultSubNav?: string;
+  activeSectionSlug?: string;
 };
 
 function BolShellInner({
@@ -27,6 +28,7 @@ function BolShellInner({
   showSubNav = false,
   subNavItems,
   defaultSubNav = "Latest",
+  activeSectionSlug,
 }: BolShellProps) {
   const tabs = subNavItems?.length ? subNavItems : ["Latest"];
   const [activeSubNav, setActiveSubNav] = useState(
@@ -87,7 +89,10 @@ function BolShellInner({
             </div>
           ) : null}
           {showSubNav ? <BolSubNavSpacer /> : null}
-          <NewsSectionSubNav stickyOffset={showSubNav ? 52 : 0} />
+          <NewsSectionSubNav
+            stickyOffset={showSubNav ? 52 : 0}
+            activeSectionSlug={activeSectionSlug}
+          />
           <div className="min-w-0 flex-1 text-[var(--ds-content-foreground,#0a0a0a)]">
             {children}
           </div>

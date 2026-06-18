@@ -76,7 +76,7 @@ export function HomePageContent({
                 <code className="rounded bg-[var(--ds-content-surface,#f5f5f5)] px-1.5 py-0.5">
                   cd studio-bol_news && npm run seed
                 </code>{" "}
-                to restore demo content.
+                to restore demo text (your uploaded images are kept).
               </p>
             ) : null}
           </div>

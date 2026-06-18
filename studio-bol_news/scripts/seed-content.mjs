@@ -14,6 +14,7 @@ const IDS = {
   authorEditorial: 'author-editorial-team',
   catExpert: 'category-expert-analysis',
   catNews: 'category-news',
+  catWorldCup: 'category-world-cup',
   catNfl: 'category-nfl',
   catNba: 'category-nba',
   newsSettings: 'newsSettings',
@@ -53,10 +54,29 @@ async function uploadArticleImage(client, {file, alt}) {
   }
 }
 
-async function uploadAllArticleImages(client) {
+function hasMainImage(image) {
+  return Boolean(image?.asset?._ref || image?.asset?._id)
+}
+
+async function fetchExistingMainImages(client, articleIds) {
+  const docs = await client.fetch(
+    `*[_type == "article" && _id in $ids]{ _id, mainImage }`,
+    {ids: articleIds},
+  )
+
+  return Object.fromEntries(docs.map((doc) => [doc._id, doc.mainImage]))
+}
+
+async function uploadAllArticleImages(client, existingMainImages = {}) {
   const images = {}
 
   for (const [articleId, config] of Object.entries(ARTICLE_IMAGES)) {
+    if (hasMainImage(existingMainImages[articleId])) {
+      images[articleId] = existingMainImages[articleId]
+      console.log(`Keeping existing mainImage for ${articleId}`)
+      continue
+    }
+
     images[articleId] = await uploadArticleImage(client, config)
     console.log(`Uploaded image for ${articleId}`)
   }
@@ -66,6 +86,9 @@ async function uploadAllArticleImages(client) {
 
 async function seed() {
   console.log('Seeding BetOnline News content…')
+  console.log(
+    'Note: existing article mainImage fields in Sanity are preserved. Upload images in Studio to keep them.',
+  )
 
   await client.createOrReplace({
     _id: IDS.authorShane,
@@ -84,6 +107,13 @@ async function seed() {
   const categories = [
     {_id: IDS.catExpert, title: 'Expert Analysis', slug: 'expert-analysis', kind: 'editorial'},
     {_id: IDS.catNews, title: 'News', slug: 'news', kind: 'editorial'},
+    {
+      _id: IDS.catWorldCup,
+      title: 'World Cup 2026',
+      slug: 'world-cup',
+      kind: 'editorial',
+      description: 'Coverage, odds, and analysis for the 2026 World Cup.',
+    },
     {_id: IDS.catNfl, title: 'NFL', slug: 'nfl', kind: 'league'},
     {_id: IDS.catNba, title: 'NBA', slug: 'nba', kind: 'league'},
   ]
@@ -103,7 +133,9 @@ async function seed() {
     subNavItems: ['Latest', 'Expert Analysis', 'NFL', 'NBA'],
   })
 
-  const articleImages = await uploadAllArticleImages(client)
+  const articleIds = Object.values(IDS).filter((id) => id.startsWith('article-'))
+  const existingMainImages = await fetchExistingMainImages(client, articleIds)
+  const articleImages = await uploadAllArticleImages(client, existingMainImages)
   const bodies = buildArticleBodies({
     worldCup: articleImages[IDS.articleFeatured],
     nfl: articleImages[IDS.articleNfl],
@@ -125,7 +157,7 @@ async function seed() {
       layout: 'standard',
       featured: true,
       author: IDS.authorShane,
-      categories: [IDS.catExpert],
+      categories: [IDS.catWorldCup, IDS.catExpert],
       body: bodies.worldCup,
     },
     {

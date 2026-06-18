@@ -13,7 +13,10 @@ export const articleCardProjection = `{
   publishedAt,
   layout,
   featured,
-  mainImage,
+  mainImage {
+    ...,
+    asset->
+  },
   author->{
     name,
     "slug": slug.current,
@@ -34,7 +37,10 @@ export const articleDetailProjection = `{
   publishedAt,
   layout,
   featured,
-  mainImage,
+  mainImage {
+    ...,
+    asset->
+  },
   author->{
     name,
     "slug": slug.current,

@@ -13,7 +13,7 @@ export function CtaBlockView({ value }: { value: CtaBlock }) {
       className={cn(
         "my-10 rounded-2xl p-6 md:p-8",
         variant === "primary" &&
-          "bg-[var(--ds-content-emphasis-bg,#0a0a0a)] text-[var(--ds-content-emphasis-fg,#ffffff)]",
+          "bg-[var(--ds-content-emphasis-bg,#2d2d2d)] text-[var(--ds-content-emphasis-fg,#ffffff)]",
         variant === "outline" &&
           "border border-[var(--ds-content-card-border,#e5e5e5)] bg-[var(--ds-content-card-bg,#ffffff)]",
         variant === "accent" &&
