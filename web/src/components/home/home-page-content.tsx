@@ -6,13 +6,16 @@ import { HomeSidebarWidgets } from "@/components/home/home-sidebar-widgets";
 import { ArticleTile } from "@/components/news/article-tile";
 import { BettingResourcesSection } from "@/components/news/betting-resources-section";
 import { NewsCarouselSection } from "@/components/news/library/news-carousel-section";
-import { PromoBannerSkeletonCarousel } from "@/components/promo/promo-banner-skeleton";
+import { PolitelyRawSection } from "@/components/news/politely-raw/politely-raw-section";
+import { PromoBannerCarousel } from "@/components/promo/promo-banner-carousel";
+import { crossSellBanners } from "@/lib/promo-banners/data";
 import type { NewsSettings } from "@/lib/sanity/news-settings";
 import type { ArticleCard, HomepageArticles } from "@/lib/sanity/types";
 
 type HomePageContentProps = {
   settings: NewsSettings;
   articles: HomepageArticles;
+  politelyRawVideos?: ArticleCard[];
   sanityProject?: { projectId: string; dataset: string };
 };
 
@@ -37,6 +40,7 @@ function buildStoryPool(featured: ArticleCard | null, latest: ArticleCard[]) {
 export function HomePageContent({
   settings,
   articles,
+  politelyRawVideos = [],
   sanityProject,
 }: HomePageContentProps) {
   const carouselBoundaryRef = useRef<HTMLElement>(null);
@@ -87,7 +91,9 @@ export function HomePageContent({
               </section>
             ) : null}
 
-            <PromoBannerSkeletonCarousel />
+            <PromoBannerCarousel banners={crossSellBanners} />
+
+            <PolitelyRawSection videos={politelyRawVideos} />
 
             {topGridArticles.length ? (
               <section aria-label="Top stories">

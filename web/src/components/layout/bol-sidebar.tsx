@@ -34,6 +34,7 @@ import {
   isNewsFeaturedItemActive,
   isNewsLeaguePath,
   newsFeaturedItems,
+  newsNavIconInvertClass,
   newsNavItems,
   type NewsFeaturedItem,
   type NewsLeague,
@@ -61,9 +62,11 @@ function LeagueIcon({ league }: { league: NewsLeague }) {
 
 function FeatureNavIcon({
   icon,
+  slug,
   active,
 }: {
   icon: NewsFeaturedItem["icon"];
+  slug: string;
   active: boolean;
 }) {
   const IconComp = typeof icon === "string" ? null : icon;
@@ -80,10 +83,7 @@ function FeatureNavIcon({
         <img
           src={icon}
           alt=""
-          className={cn(
-            "size-4 object-contain",
-            active && "brightness-0 invert",
-          )}
+          className="size-4 object-contain brightness-0 invert"
         />
       ) : IconComp ? (
         <IconComp strokeWidth={1.5} className="size-4" />
@@ -252,7 +252,11 @@ export function BolSidebar() {
                             )}
                           >
                             <Link href={feature.href} onClick={closeMobile}>
-                              <FeatureNavIcon icon={feature.icon} active={active} />
+                              <FeatureNavIcon
+                                icon={feature.icon}
+                                slug={feature.slug}
+                                active={active}
+                              />
                               <span className="group-data-[collapsible=icon]:hidden">
                                 {feature.label}
                               </span>

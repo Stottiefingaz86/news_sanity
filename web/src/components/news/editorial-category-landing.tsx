@@ -9,7 +9,8 @@ import {
   sortArticlesByDate,
 } from "@/components/news/category-article-sidebar";
 import { SportsCompetitionPanel } from "@/components/news/widgets/sports-competition-panel";
-import { PromoBannerSkeletonCarousel } from "@/components/promo/promo-banner-skeleton";
+import { PromoBannerCarousel } from "@/components/promo/promo-banner-carousel";
+import { crossSellBanners } from "@/lib/promo-banners/data";
 import {
   TopicFeaturedCarousel,
   pickCarouselArticles,
@@ -139,7 +140,7 @@ export function TopicCategoryLanding({ category, settings }: TopicCategoryLandin
               </div>
             ) : null}
 
-            <PromoBannerSkeletonCarousel />
+            <PromoBannerCarousel banners={crossSellBanners} />
 
             {showCompetition ? (
               <SportsCompetitionPanel

@@ -19,7 +19,7 @@ import {
 import { NewsCarouselSection } from "@/components/news/library/news-carousel-section";
 import { PromoBannerCarousel } from "@/components/promo/promo-banner-carousel";
 import { PromoBannerSkeletonCarousel } from "@/components/promo/promo-banner-skeleton";
-import { promoBanners } from "@/lib/promo-banners/data";
+import { crossSellBanners } from "@/lib/promo-banners/data";
 import { NewsFilterBar } from "@/components/news/library/news-filter-bar";
 import { NewsBreadcrumbs } from "@/components/news/library/news-breadcrumbs";
 import {
@@ -278,16 +278,14 @@ export function LibraryPageContent() {
             <LibrarySection
               id="cross-sell"
               title="Cross-sell banners"
-              description="Casino-style contest promo tiles for homepage and category rails. Production pages show the skeleton placeholder until promos are wired to a live feed."
+              description="Casino-sized banner rail for homepage and category pages."
             >
-              <div className="flex flex-col gap-8">
-                <DemoPanel label="Loading skeleton (live on homepage & category)">
-                  <PromoBannerSkeletonCarousel />
-                </DemoPanel>
-                <DemoPanel label="Contest carousel">
-                  <PromoBannerCarousel banners={promoBanners} />
-                </DemoPanel>
-              </div>
+              <DemoPanel label="Banner carousel">
+                <PromoBannerCarousel banners={crossSellBanners} />
+              </DemoPanel>
+              <DemoPanel label="Loading skeleton">
+                <PromoBannerSkeletonCarousel />
+              </DemoPanel>
             </LibrarySection>
 
             <LibrarySection

@@ -193,6 +193,11 @@ export const politelyRawVideosQuery = `*[
   && "politely-raw" in categories[]->slug.current
 ] | order(publishedAt desc) ${politelyRawVideoProjection}`;
 
+export const politelyRawVideosLimitedQuery = `*[
+  ${publishedArticleFilter}
+  && "politely-raw" in categories[]->slug.current
+] | order(publishedAt desc)[0...$limit] ${politelyRawVideoProjection}`;
+
 export const politelyRawVideosExceptQuery = `*[
   ${publishedArticleFilter}
   && "politely-raw" in categories[]->slug.current

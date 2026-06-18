@@ -214,3 +214,15 @@ export function isNavItemActive(pathname: string, href: string) {
   }
   return pathname === href || pathname.startsWith(`${href}/`);
 }
+
+/** World Cup SVG is dark gray — invert only that slug, never league logos. */
+export function newsNavIconInvertClass(
+  slug: string,
+  opts: { isDark?: boolean; active?: boolean; onDarkChrome?: boolean },
+): string | undefined {
+  if (slug !== "world-cup") return undefined;
+  if (opts.onDarkChrome || opts.isDark || opts.active) {
+    return "brightness-0 invert";
+  }
+  return undefined;
+}

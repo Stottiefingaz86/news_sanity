@@ -10,6 +10,7 @@ import {
   homepageArticlesQuery,
   politelyRawPageQuery,
   politelyRawVideosExceptQuery,
+  politelyRawVideosLimitedQuery,
 } from "@/lib/sanity/queries";
 import { dataset, projectId, sanityClient } from "@/lib/sanity/client";
 import { enrichManyWithRumbleMedia, enrichWithRumbleMedia } from "@/lib/rumble";
@@ -153,6 +154,16 @@ export async function getPolitelyRawPage(): Promise<PolitelyRawPageData | null> 
     ...page,
     videos: await enrichManyWithRumbleMedia(page.videos ?? []),
   };
+}
+
+export async function getPolitelyRawVideos(limit = 6): Promise<ArticleCard[]> {
+  const videos = await sanityClient.fetch<ArticleCard[]>(
+    politelyRawVideosLimitedQuery,
+    { limit },
+    fetchOptions,
+  );
+
+  return enrichManyWithRumbleMedia(videos ?? []);
 }
 
 export async function getPolitelyRawRelatedVideos(

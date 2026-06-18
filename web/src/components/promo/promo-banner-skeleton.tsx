@@ -8,17 +8,17 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
-  CASINO_BANNER_ASPECT_CLASS,
   CASINO_BANNER_CAROUSEL_GAP,
   CASINO_BANNER_CAROUSEL_ITEM_BASIS,
   CASINO_BANNER_SURFACE_CLASS,
+  CROSS_SELL_BANNER_ASPECT_CLASS,
 } from "@/lib/promo-banners/constants";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_SKELETON_COUNT = 4;
 
 const CAROUSEL_NAV_CLASS =
-  "size-8 border-[var(--ds-content-card-border,#e5e5e5)] bg-[var(--ds-content-card-bg,#ffffff)]/95 text-[var(--ds-content-foreground,#0a0a0a)] shadow-sm hover:bg-[var(--ds-content-card-bg,#ffffff)] disabled:opacity-30";
+  "promo-carousel-nav size-8 border-[var(--ds-content-card-border,#e5e5e5)] bg-[var(--ds-content-card-bg,#ffffff)]/95 text-[var(--ds-content-foreground,#0a0a0a)] shadow-sm hover:bg-[var(--ds-content-card-bg,#ffffff)] disabled:opacity-30";
 
 type PromoBannerSkeletonProps = {
   className?: string;
@@ -30,7 +30,7 @@ export function PromoBannerSkeleton({ className }: PromoBannerSkeletonProps) {
     <div
       className={cn(
         CASINO_BANNER_SURFACE_CLASS,
-        CASINO_BANNER_ASPECT_CLASS,
+        CROSS_SELL_BANNER_ASPECT_CLASS,
         "promo-skeleton-shimmer bg-[#e8e8e8] motion-safe:animate-pulse motion-reduce:animate-none",
         className,
       )}

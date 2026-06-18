@@ -55,7 +55,7 @@
   --ds-primary-hover: #dc2a2f;
   --ds-nav-bg: #2d2e2c;
   --ds-sidebar-bg: #2d2d2d;
-  --ds-page-bg: #1a1a1a;
+  --ds-page-bg: #1c1c1c;
   --ds-accent-green: #8ac500;
   --ds-card-bg: #ffffff;
   --ds-content-bg: #ffffff;
@@ -107,22 +107,23 @@
 }
 
 [data-content-area].dark {
-  --ds-content-bg: #141414;
+  /* Dark content = BOL page canvas (#1c1c1c), cards on sidebar graphite (#2d2d2d) */
+  --ds-content-bg: var(--ds-page-bg);
   --ds-content-foreground: #f5f5f5;
   --ds-content-muted: #a3a3a3;
-  --ds-content-card-bg: #1f1f1f;
+  --ds-content-card-bg: var(--ds-sidebar-bg);
   --ds-content-card-border: rgba(255, 255, 255, 0.1);
   --ds-content-surface: #262626;
-  --ds-content-emphasis-bg: #2d2d2d;
+  --ds-content-emphasis-bg: var(--ds-sidebar-bg);
   --ds-content-emphasis-fg: #ffffff;
   --ds-hero-image-bg: #383838;
   --ds-muted-text: #a3a3a3;
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --background: var(--ds-page-bg);
+  --foreground: #f5f5f5;
+  --card: var(--ds-sidebar-bg);
+  --card-foreground: #f5f5f5;
+  --popover: var(--ds-sidebar-bg);
+  --popover-foreground: #f5f5f5;
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
@@ -230,12 +231,31 @@
     @apply border-border outline-ring/50;
   }
   body {
-    background-color: var(--ds-nav-bg, #2d2e2c);
+    background-color: var(--ds-page-bg, #1c1c1c);
   }
   html {
     @apply font-sans;
-    background-color: var(--ds-nav-bg, #2d2e2c);
+    background-color: var(--ds-page-bg, #1c1c1c);
   }
+}
+
+/* BOL casino sub-nav: frosted page bg, not a separate darker/lighter slab */
+[data-content-area].dark [data-news-section-sub-nav] {
+  background: rgba(28, 28, 28, 0.6) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-content-area].dark .promo-carousel-nav {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  background-color: rgba(28, 28, 28, 0.9) !important;
+  color: #ffffff !important;
+}
+
+[data-content-area].dark .promo-carousel-nav:hover {
+  background-color: var(--ds-page-bg, #1c1c1c) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 [data-nav-header] {
@@ -279,7 +299,7 @@
 }
 
 [data-sub-nav] {
-  background: rgba(26, 26, 26, 0.6) !important;
+  background: rgba(28, 28, 28, 0.6) !important;
 }
 
 [data-bol-chrome] [data-nav-header],
@@ -306,7 +326,7 @@
 }
 
 .dark [data-sub-nav] {
-  background: rgba(26, 26, 26, 0.6) !important;
+  background: rgba(28, 28, 28, 0.6) !important;
 }
 
 [data-sidebar="sidebar"],

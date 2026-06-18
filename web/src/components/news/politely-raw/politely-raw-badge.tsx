@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 type PolitelyRawBadgeProps = {
   className?: string;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
 };
 
 export function PolitelyRawBadge({ className, size = "md" }: PolitelyRawBadgeProps) {
@@ -14,7 +14,9 @@ export function PolitelyRawBadge({ className, size = "md" }: PolitelyRawBadgePro
       alt="Politely RAW"
       className={cn(
         "shrink-0 object-contain",
-        size === "sm" ? "h-5 w-auto" : "h-7 w-auto",
+        size === "sm" && "h-5 w-auto",
+        size === "md" && "h-7 w-auto",
+        size === "lg" && "h-10 w-auto md:h-12",
         className,
       )}
     />

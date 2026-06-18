@@ -42,7 +42,7 @@ function BolShellInner({
     <div
       data-page-bg
       className="w-full overflow-x-clip font-sans"
-      style={{ backgroundColor: "var(--ds-nav-bg, #2D2E2C)" }}
+      style={{ backgroundColor: "var(--ds-page-bg, #1c1c1c)" }}
     >
       <div className="dark" data-bol-chrome>
         <BolHeader />
