@@ -81,3 +81,19 @@ export type CategoryPageData = {
   description?: string;
   articles: ArticleCard[];
 };
+
+export type CategoryArticlesPage = {
+  articles: ArticleCard[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+};
+
+export type CategoryPageFullData = {
+  title: string;
+  slug: string;
+  description?: string;
+  featuredArticles: ArticleCard[];
+  articlesPage: CategoryArticlesPage;
+};

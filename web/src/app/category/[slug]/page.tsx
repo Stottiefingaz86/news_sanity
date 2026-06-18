@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CategoryPageContent } from "@/components/news/category-page-content";
-import { getCategoryPage, getCategorySlugs } from "@/lib/sanity/articles";
+import {
+  getCategoryPageData,
+  getCategorySlugs,
+} from "@/lib/sanity/articles";
 import { getNewsSettings } from "@/lib/sanity/news-settings";
 
 type CategoryPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string }>;
 };
+
+function parsePageParam(value?: string) {
+  const parsed = Number.parseInt(value ?? "1", 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+}
 
 export async function generateStaticParams() {
   const slugs = await getCategorySlugs();
@@ -17,7 +26,7 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const category = await getCategoryPage(slug);
+  const category = await getCategoryPageData(slug);
 
   if (!category) {
     return { title: "Category not found" };
@@ -29,10 +38,16 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: CategoryPageProps) {
   const { slug } = await params;
+  const { page: pageParam } = await searchParams;
+  const page = parsePageParam(pageParam);
+
   const [category, settings] = await Promise.all([
-    getCategoryPage(slug),
+    getCategoryPageData(slug, page),
     getNewsSettings(),
   ]);
 

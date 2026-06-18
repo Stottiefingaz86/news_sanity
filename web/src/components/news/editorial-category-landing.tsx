@@ -1,26 +1,26 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import { BolShell } from "@/components/layout/bol-shell";
 import { CategoryPageNav } from "@/components/news/article-breadcrumbs";
+import { CategoryArticleFeed } from "@/components/news/category-article-feed";
 import {
   CategoryArticleSidebar,
   sortArticlesByDate,
 } from "@/components/news/category-article-sidebar";
 import { SportsCompetitionPanel } from "@/components/news/widgets/sports-competition-panel";
+import { PromoBannerSkeletonCarousel } from "@/components/promo/promo-banner-skeleton";
 import {
   TopicFeaturedCarousel,
   pickCarouselArticles,
 } from "@/components/news/topic-featured-carousel";
-import { articlePath } from "@/lib/article-url";
 import { leagueIconForSlug } from "@/lib/league-icons";
 import { newsLeagues, newsSectionNavItems } from "@/lib/news-nav";
 import type { NewsSettings } from "@/lib/sanity/news-settings";
-import type { ArticleCard, CategoryPageData } from "@/lib/sanity/types";
+import type { ArticleCard, CategoryPageFullData } from "@/lib/sanity/types";
 
 type TopicCategoryLandingProps = {
-  category: CategoryPageData;
+  category: CategoryPageFullData;
   settings: NewsSettings;
 };
 
@@ -35,15 +35,17 @@ function showCompetitionForCategory(slug: string) {
   return newsLeagues.some((league) => league.slug === slug);
 }
 
+const DESKTOP_CAROUSEL_SYNC_QUERY = "(min-width: 1024px)";
+
 export function TopicCategoryLanding({ category, settings }: TopicCategoryLandingProps) {
-  const router = useRouter();
   const topicIcon = topicIconForSlug(category.slug);
   const showCompetition = showCompetitionForCategory(category.slug);
-  const carouselArticles = pickCarouselArticles(category.articles, 5);
+  const carouselArticles = pickCarouselArticles(category.featuredArticles, 5);
   const sidebarArticles = useMemo(
-    () => sortArticlesByDate(category.articles),
-    [category.articles],
+    () => sortArticlesByDate(category.featuredArticles),
+    [category.featuredArticles],
   );
+  const hasHeroContent = category.featuredArticles.length > 0;
 
   const [activeArticleId, setActiveArticleId] = useState<string | null>(
     carouselArticles[0]?._id ?? sidebarArticles[0]?._id ?? null,
@@ -62,16 +64,17 @@ export function TopicCategoryLanding({ category, settings }: TopicCategoryLandin
   }, []);
 
   const handleSidebarSelect = useCallback(
-    (article: ArticleCard) => {
+    (article: ArticleCard): boolean => {
+      const isDesktopLayout = window.matchMedia(DESKTOP_CAROUSEL_SYNC_QUERY).matches;
       const carouselIndex = carouselIndexById.get(article._id);
-      if (carouselIndex !== undefined) {
+      if (isDesktopLayout && carouselIndex !== undefined) {
         setActiveArticleId(article._id);
         setScrollToCarouselIndex(carouselIndex);
-        return;
+        return true;
       }
-      router.push(articlePath(article.slug));
+      return false;
     },
-    [carouselIndexById, router],
+    [carouselIndexById],
   );
 
   useEffect(() => {
@@ -89,7 +92,7 @@ export function TopicCategoryLanding({ category, settings }: TopicCategoryLandin
       <div className="mx-auto w-full max-w-[1240px] px-4 py-6 md:px-8 md:py-8 lg:px-10">
         <CategoryPageNav title={category.title} />
 
-        {category.articles.length === 0 ? (
+        {category.articlesPage.total === 0 && !hasHeroContent ? (
           <p className="mt-10 text-sm text-[var(--ds-content-muted,#525252)]">
             No articles in this category yet.
           </p>
@@ -116,23 +119,27 @@ export function TopicCategoryLanding({ category, settings }: TopicCategoryLandin
               </div>
             </header>
 
-            <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
-              <div className="min-w-0">
-                <TopicFeaturedCarousel
-                  articles={carouselArticles}
-                  onActiveChange={handleCarouselActiveChange}
-                  scrollToIndex={scrollToCarouselIndex}
+            {hasHeroContent ? (
+              <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
+                <div className="min-w-0">
+                  <TopicFeaturedCarousel
+                    articles={carouselArticles}
+                    onActiveChange={handleCarouselActiveChange}
+                    scrollToIndex={scrollToCarouselIndex}
+                  />
+                </div>
+
+                <CategoryArticleSidebar
+                  articles={sidebarArticles}
+                  activeArticleId={activeArticleId}
+                  onArticleSelect={handleSidebarSelect}
+                  title={category.title}
+                  className="min-h-[20rem] sm:min-h-[22rem] md:min-h-[24rem] lg:min-h-0"
                 />
               </div>
+            ) : null}
 
-              <CategoryArticleSidebar
-                articles={sidebarArticles}
-                activeArticleId={activeArticleId}
-                onArticleSelect={handleSidebarSelect}
-                title={category.title}
-                className="min-h-[20rem] sm:min-h-[22rem] md:min-h-[24rem] lg:min-h-0"
-              />
-            </div>
+            <PromoBannerSkeletonCarousel />
 
             {showCompetition ? (
               <SportsCompetitionPanel
@@ -140,6 +147,12 @@ export function TopicCategoryLanding({ category, settings }: TopicCategoryLandin
                 defaultTab="table"
               />
             ) : null}
+
+            <CategoryArticleFeed
+              slug={category.slug}
+              title={category.title}
+              articlesPage={category.articlesPage}
+            />
           </div>
         )}
       </div>

@@ -9,8 +9,9 @@ export function articleAbsoluteUrl(slug: string) {
   return `${SITE_ORIGIN}${articlePath(slug)}`;
 }
 
-export function categoryPath(slug: string) {
-  return `/category/${slug}`;
+export function categoryPath(slug: string, page?: number) {
+  if (!page || page <= 1) return `/category/${slug}`;
+  return `/category/${slug}?page=${page}`;
 }
 
 export function primaryCategoryLabel(

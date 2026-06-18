@@ -112,6 +112,45 @@ export const categoryBySlugQuery = `*[
   ] | order(publishedAt desc) ${articleCardProjection}
 }`;
 
+export const categoryMetaBySlugQuery = `*[
+  _type == "category"
+  && slug.current == $slug
+][0]{
+  title,
+  "slug": slug.current,
+  description
+}`;
+
+export const categoryFeaturedArticlesQuery = `*[
+  _type == "category"
+  && slug.current == $slug
+][0]{
+  "articles": *[
+    ${publishedArticleFilter}
+    && references(^._id)
+  ] | order(publishedAt desc)[0...$limit] ${articleCardProjection}
+}.articles`;
+
+export const categoryArticleCountQuery = `*[
+  _type == "category"
+  && slug.current == $slug
+][0]{
+  "total": count(*[
+    ${publishedArticleFilter}
+    && references(^._id)
+  ])
+}.total`;
+
+export const categoryArticlesPaginatedQuery = `*[
+  _type == "category"
+  && slug.current == $slug
+][0]{
+  "articles": *[
+    ${publishedArticleFilter}
+    && references(^._id)
+  ] | order(publishedAt desc)[$start...$end] ${articleCardProjection}
+}.articles`;
+
 export const categorySlugsQuery = `*[_type == "category" && defined(slug.current)].slug.current`;
 
 export const politelyRawVideoProjection = `{

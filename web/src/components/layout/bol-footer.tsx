@@ -221,10 +221,6 @@ export function BolFooter() {
               name="Responsible Gaming"
               iconPath="/banners/partners/responsible gaming.webp"
             />
-            <SecurityBadge
-              name="SSL Secure"
-              iconPath="/banners/partners/trust.png"
-            />
             <div className="flex size-7 shrink-0 items-center justify-center rounded-full border-2 border-white bg-red-500">
               <span className="text-[10px] font-bold text-white">18+</span>
             </div>

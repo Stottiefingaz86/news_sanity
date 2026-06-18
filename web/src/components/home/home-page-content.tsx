@@ -6,6 +6,7 @@ import { HomeSidebarWidgets } from "@/components/home/home-sidebar-widgets";
 import { ArticleTile } from "@/components/news/article-tile";
 import { BettingResourcesSection } from "@/components/news/betting-resources-section";
 import { NewsCarouselSection } from "@/components/news/library/news-carousel-section";
+import { PromoBannerSkeletonCarousel } from "@/components/promo/promo-banner-skeleton";
 import type { NewsSettings } from "@/lib/sanity/news-settings";
 import type { ArticleCard, HomepageArticles } from "@/lib/sanity/types";
 
@@ -85,6 +86,8 @@ export function HomePageContent({
                 <ArticleTile article={heroArticle} featured />
               </section>
             ) : null}
+
+            <PromoBannerSkeletonCarousel />
 
             {topGridArticles.length ? (
               <section aria-label="Top stories">

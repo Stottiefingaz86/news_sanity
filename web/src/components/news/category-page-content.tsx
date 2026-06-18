@@ -2,10 +2,10 @@
 
 import { TopicCategoryLanding } from "@/components/news/editorial-category-landing";
 import type { NewsSettings } from "@/lib/sanity/news-settings";
-import type { CategoryPageData } from "@/lib/sanity/types";
+import type { CategoryPageFullData } from "@/lib/sanity/types";
 
 type CategoryPageContentProps = {
-  category: CategoryPageData;
+  category: CategoryPageFullData;
   settings: NewsSettings;
 };
 

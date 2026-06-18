@@ -10,7 +10,8 @@ import { cn } from "@/lib/utils";
 type CategoryArticleSidebarProps = {
   articles: ArticleCard[];
   activeArticleId?: string | null;
-  onArticleSelect?: (article: ArticleCard, index: number) => void;
+  /** Return true to keep the user on the page (e.g. sync carousel). False opens the article link. */
+  onArticleSelect?: (article: ArticleCard, index: number) => boolean;
   title?: string;
   className?: string;
 };
@@ -47,9 +48,8 @@ export function CategoryArticleSidebar({
               <Link
                 href={articlePath(article.slug)}
                 onClick={(event) => {
-                  if (onArticleSelect) {
+                  if (onArticleSelect?.(article, index)) {
                     event.preventDefault();
-                    onArticleSelect(article, index);
                   }
                 }}
                 className={cn(

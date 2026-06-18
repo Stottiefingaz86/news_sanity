@@ -1,7 +1,11 @@
 import {
   articleBySlugQuery,
   articleSlugsQuery,
+  categoryArticlesPaginatedQuery,
+  categoryArticleCountQuery,
   categoryBySlugQuery,
+  categoryFeaturedArticlesQuery,
+  categoryMetaBySlugQuery,
   categorySlugsQuery,
   homepageArticlesQuery,
   politelyRawPageQuery,
@@ -12,12 +16,17 @@ import { enrichManyWithRumbleMedia, enrichWithRumbleMedia } from "@/lib/rumble";
 import type {
   ArticleCard,
   ArticleDetail,
+  CategoryArticlesPage,
   CategoryPageData,
+  CategoryPageFullData,
   HomepageArticles,
   PolitelyRawPageData,
 } from "@/lib/sanity/types";
 
 const fetchOptions = { cache: "no-store" as const };
+
+export const CATEGORY_FEATURED_LIMIT = 15;
+export const CATEGORY_PAGE_SIZE = 12;
 
 export async function getHomepageArticles(): Promise<HomepageArticles> {
   const data = await sanityClient.fetch<HomepageArticles>(
@@ -62,6 +71,69 @@ export async function getCategoryPage(
     { slug },
     fetchOptions,
   );
+}
+
+function buildArticlesPage(
+  articles: ArticleCard[],
+  total: number,
+  page: number,
+  pageSize: number,
+): CategoryArticlesPage {
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  return {
+    articles,
+    total,
+    page,
+    pageSize,
+    totalPages,
+  };
+}
+
+export async function getCategoryPageData(
+  slug: string,
+  requestedPage = 1,
+  pageSize = CATEGORY_PAGE_SIZE,
+): Promise<CategoryPageFullData | null> {
+  const meta = await sanityClient.fetch<CategoryPageFullData | null>(
+    categoryMetaBySlugQuery,
+    { slug },
+    fetchOptions,
+  );
+
+  if (!meta) return null;
+
+  const total = await sanityClient.fetch<number>(
+    categoryArticleCountQuery,
+    { slug },
+    fetchOptions,
+  );
+
+  const safeTotal = total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(safeTotal / pageSize));
+  const page = Math.min(Math.max(1, requestedPage), totalPages);
+  const start = (page - 1) * pageSize;
+  const end = start + pageSize;
+
+  const [featuredArticles, pageArticles] = await Promise.all([
+    sanityClient.fetch<ArticleCard[]>(
+      categoryFeaturedArticlesQuery,
+      { slug, limit: CATEGORY_FEATURED_LIMIT },
+      fetchOptions,
+    ),
+    sanityClient.fetch<ArticleCard[]>(
+      categoryArticlesPaginatedQuery,
+      { slug, start, end },
+      fetchOptions,
+    ),
+  ]);
+
+  return {
+    title: meta.title,
+    slug: meta.slug,
+    description: meta.description,
+    featuredArticles: featuredArticles ?? [],
+    articlesPage: buildArticlesPage(pageArticles ?? [], safeTotal, page, pageSize),
+  };
 }
 
 export async function getCategorySlugs(): Promise<string[]> {

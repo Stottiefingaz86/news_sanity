@@ -17,6 +17,9 @@ import {
   ArticleCardStat,
 } from "@/components/news/library/news-card-variants";
 import { NewsCarouselSection } from "@/components/news/library/news-carousel-section";
+import { PromoBannerCarousel } from "@/components/promo/promo-banner-carousel";
+import { PromoBannerSkeletonCarousel } from "@/components/promo/promo-banner-skeleton";
+import { promoBanners } from "@/lib/promo-banners/data";
 import { NewsFilterBar } from "@/components/news/library/news-filter-bar";
 import { NewsBreadcrumbs } from "@/components/news/library/news-breadcrumbs";
 import {
@@ -43,6 +46,7 @@ const SECTIONS = [
   { id: "filters", label: "Filters & dropdowns" },
   { id: "cards", label: "Card variants" },
   { id: "carousel", label: "Carousels" },
+  { id: "cross-sell", label: "Cross-sell banners" },
   { id: "grids", label: "Grids & masonry" },
   { id: "blocks", label: "Article blocks" },
   { id: "news-ui", label: "News UI" },
@@ -269,6 +273,21 @@ export function LibraryPageContent() {
                 title="More from the desk"
                 articles={DEMO_ARTICLES}
               />
+            </LibrarySection>
+
+            <LibrarySection
+              id="cross-sell"
+              title="Cross-sell banners"
+              description="Casino-style contest promo tiles for homepage and category rails. Production pages show the skeleton placeholder until promos are wired to a live feed."
+            >
+              <div className="flex flex-col gap-8">
+                <DemoPanel label="Loading skeleton (live on homepage & category)">
+                  <PromoBannerSkeletonCarousel />
+                </DemoPanel>
+                <DemoPanel label="Contest carousel">
+                  <PromoBannerCarousel banners={promoBanners} />
+                </DemoPanel>
+              </div>
             </LibrarySection>
 
             <LibrarySection
