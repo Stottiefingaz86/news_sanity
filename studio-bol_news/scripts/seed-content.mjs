@@ -20,6 +20,9 @@ const IDS = {
   catPolitelyRaw: 'category-politely-raw',
   newsSettings: 'newsSettings',
   articleFeatured: 'article-world-cup-rankings',
+  articleWorldCupNeymar: 'article-world-cup-neymar-gamble',
+  articleWorldCupMartinez: 'article-world-cup-martinez-exit',
+  articleWorldCupIran: 'article-world-cup-iran-chaos',
   articleNfl: 'article-nfl-division-odds',
   articleNba: 'article-nba-playoff-guide',
   articleSgp: 'article-sgp-features',
@@ -37,6 +40,9 @@ const ref = (id, key = id) => ({_key: key, _type: 'reference', _ref: id})
 
 const ARTICLE_IMAGES = {
   [IDS.articleFeatured]: {file: 'world-cup.jpg', alt: 'World Cup power rankings hero'},
+  [IDS.articleWorldCupNeymar]: {file: 'world-cup.jpg', alt: 'Neymar and Brazil World Cup injury update'},
+  [IDS.articleWorldCupMartinez]: {file: 'world-cup.jpg', alt: 'Roberto Martinez Portugal World Cup press conference'},
+  [IDS.articleWorldCupIran]: {file: 'world-cup.jpg', alt: 'Iran World Cup team travel and visa controversy'},
   [IDS.articleNfl]: {file: 'nfl.jpg', alt: 'NFL division odds preview'},
   [IDS.articleNba]: {file: 'nba.jpg', alt: 'NBA playoff race betting guide'},
   [IDS.articleSgp]: {file: 'betting.jpg', alt: 'March Madness SGP features'},
@@ -180,6 +186,48 @@ async function seed() {
       author: IDS.authorShane,
       categories: [IDS.catWorldCup, IDS.catExpert],
       body: bodies.worldCup,
+    },
+    {
+      _id: IDS.articleWorldCupNeymar,
+      title: "Brazil's Neymar Gamble: Saving Their Star for the Knockouts",
+      slug: 'brazil-neymar-gamble-saving-star-for-knockouts',
+      excerpt:
+        'Brazil may sit Neymar for the entire group stage while managing a calf injury — and the betting market is still catching up.',
+      summary:
+        'Brazil may sit Neymar for the entire group stage while managing a calf injury — and the betting market is still catching up.',
+      layout: 'standard',
+      author: IDS.authorShane,
+      categories: [IDS.catWorldCup, IDS.catExpert],
+      body: bodies.worldCupNeymar,
+      publishedAtOffsetDays: -1,
+    },
+    {
+      _id: IDS.articleWorldCupMartinez,
+      title: "Martinez's Last Dance: Portugal's Coach Is Already Planning His Exit",
+      slug: 'roberto-martinez-portugal-exit-world-cup-drama',
+      excerpt:
+        'Roberto Martinez all but confirmed this World Cup is his last as Portugal boss — with Rúben Dias ruled out of the opener against DR Congo.',
+      summary:
+        'Roberto Martinez all but confirmed this World Cup is his last as Portugal boss — with Rúben Dias ruled out of the opener against DR Congo.',
+      layout: 'analysis',
+      author: IDS.authorShane,
+      categories: [IDS.catWorldCup, IDS.catExpert],
+      body: bodies.worldCupMartinez,
+      publishedAtOffsetDays: -2,
+    },
+    {
+      _id: IDS.articleWorldCupIran,
+      title: "Iran's World Cup Nightmare: Visas, Late Flights, and a Dash Back to Mexico",
+      slug: 'iran-world-cup-visa-travel-chaos-betting-impact',
+      excerpt:
+        'Iran were ordered to fly back to Tijuana hours after their opener — the kind of off-pitch chaos bettors must price into Group G.',
+      summary:
+        'Iran were ordered to fly back to Tijuana hours after their opener — the kind of off-pitch chaos bettors must price into Group G.',
+      layout: 'standard',
+      author: IDS.authorEditorial,
+      categories: [IDS.catWorldCup, IDS.catNews],
+      body: bodies.worldCupIran,
+      publishedAtOffsetDays: -3,
     },
     {
       _id: IDS.articleNfl,

@@ -135,6 +135,26 @@ function textHeading(key, text, level = 'h2') {
 }
 
 const RELATED = {
+  worldCupRankings: {
+    title: 'Ranking 10 Teams with Best Chance to Win the World Cup',
+    href: '/ranking-10-teams-best-chance-win-world-cup',
+    category: 'Expert Analysis',
+  },
+  worldCupNeymar: {
+    title: "Brazil's Neymar Gamble: Saving Their Star for the Knockouts",
+    href: '/brazil-neymar-gamble-saving-star-for-knockouts',
+    category: 'World Cup 2026',
+  },
+  worldCupMartinez: {
+    title: "Martinez's Last Dance: Portugal's Coach Is Already Planning His Exit",
+    href: '/roberto-martinez-portugal-exit-world-cup-drama',
+    category: 'World Cup 2026',
+  },
+  worldCupIran: {
+    title: "Iran's World Cup Nightmare: Visas, Late Flights, and a Dash Back to Mexico",
+    href: '/iran-world-cup-visa-travel-chaos-betting-impact',
+    category: 'World Cup 2026',
+  },
   worldCup: {
     title: 'Closing Line Value Explained for New Bettors',
     href: '/closing-line-value-explained',
@@ -285,13 +305,182 @@ export function buildWorldCupBody() {
       },
     ]),
     relatedArticles('wc_rel', 'More World Cup coverage', [
-      RELATED.worldCup,
-      RELATED.clv,
+      RELATED.worldCupNeymar,
+      RELATED.worldCupMartinez,
+      RELATED.worldCupIran,
+    ]),
+  ].filter(Boolean)
+}
+
+export function buildWorldCupNeymarBody() {
+  return [
+    standfirst(
+      'wc2_standfirst',
+      'Brazil’s medical staff are prepared to navigate the entire group stage without Neymar — and the betting market is only now catching up to what that means for group winners, knockout props, and the Seleção’s outright price.',
+    ),
+    proseBody(
+      'wc2_lede',
+      [
+        'The gossip out of Granja Comary is blunt: Carlo Ancelotti’s staff would rather miss Neymar in June than lose him in July. After a grade-two calf injury sustained with Santos on May 17, Brazil’s all-time leading scorer has not trained on grass with the squad since arriving at camp on May 27. Internally, the target is a knockout-round return — which effectively rules him out against Haiti and makes him a major doubt for the Scotland group finale in Miami on June 24.',
+      ],
+      {dropCap: true},
+    ),
+    textHeading('wc2_h2_strategy', 'Short-term caution, long-term gain'),
+    proseBody('wc2_p_strategy', [
+      'Medical staff are prioritizing fresh imaging before accelerating Neymar back to full training. The grade-two calf problem is the kind of setback that worsens if a star pushes through a group-stage cameo against a physical opponent — exactly the scenario Brazil wants to avoid when the knockout bracket opens.',
+      'That creates a strange split in the market. Brazil remain co-favorites to lift the trophy at +450, but group-stage totals and first-scorer props already reflect a squad leaning on Vinícius Júnior, Rodrygo, and Raphinha without their penalty taker and creative hub.',
+      'The Haiti opener on June 13 and the Scotland fixture in Miami are the two dates bettors should circle. If Neymar is officially ruled out for both, Brazil group-winner prices often tighten while “to reach the final” tickets can actually drift — the public still prices reputation over the risk of a slow start without their talisman.',
+    ]),
+    pullQuote(
+      'wc2_pq1',
+      'Brazil without Neymar in the group stage is not a crisis — unless you already bought Brazil group-stage scorer props at star prices.',
+      'Shane Pratt, BetOnline Analysis',
+      'highlight',
+    ),
+    textHeading('wc2_h2_betting', 'Where the lines are moving'),
+    oddsList('wc2_odds', 'Brazil — key markets', [
+      {label: 'Outright winner', odds: '+450'},
+      {label: 'Group K winner', odds: '-180'},
+      {label: 'Reach the final', odds: '+220'},
+      {label: 'Neymar — anytime scorer (Group stage)', odds: '+140'},
+    ]),
+    proseBody('wc2_p_betting', [
+      'The smarter play may be layering Brazil knockout-stage props once Neymar’s return timeline firms up. A rested Neymar entering the Round of 32 is a different proposition than a limping star rushed back for Scotland.',
+      'Contrast that with France and Argentina, whose attacking cores entered the tournament at full fitness. If Brazil stumble to a draw in a group game without Neymar, their Round of 32 path could harden fast — which is where reach-the-semis markets beat winner tickets for bettors who still believe in the sixth title.',
+    ]),
+    ...bullets('wc2_bul', [
+      'Monitor team news 48 hours before Haiti and Scotland — Brazil rarely confirm availability early.',
+      'Fade Neymar Golden Boot tickets until he logs a full training session on grass.',
+      'Shop Brazil “to win Group K” vs “top two” if Haiti or Scotland prices offer plus-money on the underdog.',
+      'Consider Brazil knockout-round team totals once the Round of 32 opponent is known.',
+    ]),
+    ctaBlock('wc2_cta', {
+      kicker: 'World Cup 2026',
+      title: 'Shop Brazil group and knockout markets',
+      body: 'Compare group-winner lines, reach-the-final prices, and player props before Neymar’s status moves the board again.',
+      buttonLabel: 'View World Cup odds',
+      buttonHref: 'https://www.betonline.ag/sportsbook',
+      variant: 'accent',
+    }),
+    relatedArticles('wc2_rel', 'More World Cup coverage', [
+      RELATED.worldCupRankings,
+      RELATED.worldCupMartinez,
+      RELATED.worldCupIran,
+    ]),
+  ].filter(Boolean)
+}
+
+export function buildWorldCupMartinezBody() {
+  return [
+    standfirst(
+      'wc3_standfirst',
+      'Roberto Martinez strongly hinted this World Cup will be his last tournament as Portugal’s head coach — and the squad news ahead of the DR Congo opener only adds to the drama surrounding a side priced fourth on the outright board.',
+    ),
+    proseBody(
+      'wc3_lede',
+      [
+        'In Houston on the eve of Portugal’s World Cup opener, Martinez did not quite announce his resignation — but he did everything short of it. Asked about reports that he will leave after the tournament regardless of result, the Belgian said the conversation “is not news” in Portugal and that the focus remains on the World Cup. Translation for bettors: this is a lame-duck manager leading one of the deepest squads in the field, and the market has not fully priced the uncertainty.',
+      ],
+      {dropCap: true},
+    ),
+    textHeading('wc3_h2_exit', 'A lame-duck coach with a loaded squad'),
+    proseBody('wc3_p_exit', [
+      'Martinez confirmed center-back Rúben Dias will miss the DR Congo opener as Portugal refuse to “take risks” with a key defender. That is prudent football — but it is also the kind of pre-tournament wrinkle that makes group-winner bettors nervous when the coach already has one foot out the door.',
+      'Portugal arrive at +900 to win the World Cup with Bruno Fernandes and Vitinha anchoring what many consider the best midfield in the tournament. Yet highly touted squads under departing managers have a history of slow starts — and DR Congo are not a soft opener. They finished ahead of Cameroon and Nigeria in qualifying and carry European-league talent across the spine.',
+      'Martinez’s press-conference tone — calm, almost resigned — mirrors the gossip circulating in Lisbon: the FA and the coach have already discussed life after July, and a Nations League title was the farewell gift before the main event.',
+    ]),
+    emph(
+      'wc3_p_quote',
+      'Martinez on his future: ',
+      '“Maybe it’s new elsewhere, but in Portugal we’ve discussed it a lot already. The World Cup is what matters.”',
+      ' The subtext is harder to miss than the headline.',
+    ),
+    textHeading('wc3_h2_markets', 'Portugal prices vs. the noise'),
+    oddsList('wc3_odds', 'Portugal — opening markets', [
+      {label: 'Outright winner', odds: '+900'},
+      {label: 'Group K winner', odds: '+110'},
+      {label: 'Beat DR Congo (Match 1)', odds: '-165'},
+      {label: 'Reach the semifinals', odds: '+350'},
+    ]),
+    contentGrid('wc3_grid', 'uniform', 2, [
       {
-        title: 'BetOnline Launches New SGP+ Features for March Madness',
-        href: '/betonline-launches-new-sgp-features',
-        category: 'News',
+        title: 'The bull case',
+        body: 'Squad depth survives a cautious opener. Martinez rides Fernandes and Vitinha through a soft knockout half if Colombia stumble elsewhere.',
       },
+      {
+        title: 'The bear case',
+        body: 'Lame-duck energy, Dias rust, and a flexible DR Congo side that defends space well — a group-stage draw is not off the table.',
+      },
+    ]),
+    proseBody('wc3_p_close', [
+      'If Portugal drop points early, outright tickets die fast — but reach-the-semis and group-winner prices can become value for bettors who still trust the talent. Watch Martinez’s team sheet against DR Congo: a conservative XI signals he is managing for survival, not statement wins.',
+    ]),
+    relatedArticles('wc3_rel', 'More World Cup coverage', [
+      RELATED.worldCupRankings,
+      RELATED.worldCupNeymar,
+      RELATED.worldCupIran,
+    ]),
+  ].filter(Boolean)
+}
+
+export function buildWorldCupIranBody() {
+  return [
+    standfirst(
+      'wc4_standfirst',
+      'Iran’s World Cup cycle has been defined by geopolitics off the pitch as much as football on it — visa denials, forced post-match flights, and a five-hour border crossing before their opening draw with New Zealand. Bettors pricing Group G should account for fatigue the box score never shows.',
+    ),
+    proseBody(
+      'wc4_lede',
+      [
+        'Coach Amir Ghalenoei told reporters Iran were ordered to leave the United States immediately after their 2-2 opener with New Zealand in Inglewood — despite planning to recover locally overnight. Instead of a normal post-match routine, the squad boarded a plane for the 140-mile trip back to their Tijuana training base only hours after full time.',
+      ],
+      {dropCap: true},
+    ),
+    textHeading('wc4_h2_logistics', 'The travel rules nobody priced in'),
+    proseBody('wc4_p_logistics', [
+      'Andrew Giuliani, executive director of the White House World Cup task force, confirmed Iran would be allowed to enter the U.S. one day before each match but required to leave on the evening of their games. That is not standard tournament logistics — it is a political arrangement layered on top of a sporting competition.',
+      'Captain Mehdi Taremi described five hours of travel and security checks on what should have been a short trip from Tijuana to Los Angeles before the opener. Key federation staff and coaching support personnel were denied U.S. visas entirely, compounding preparation problems that began when FIFA rejected Iran’s request to move group-stage matches out of the country.',
+      'Winger Mehdi Torabi’s entry visa expired after the first game; the team scrambled to secure a multiple-entry replacement so he could travel for future fixtures. Every match day now carries administrative risk that most World Cup nations never face.',
+    ]),
+    pullQuote(
+      'wc4_pq1',
+      'You cannot model Iran’s fitness in a spreadsheet when the squad is flying back to Mexico on match night.',
+      'Editorial Team, BetOnline News',
+      'minimal',
+    ),
+    textHeading('wc4_h2_betting', 'Group G angles bettors are missing'),
+    proseBody('wc4_p_betting', [
+      'Iran share Group G with New Zealand, Belgium, and Egypt. The opening draw against New Zealand showed resilience — but the travel schedule punishes teams that rely on recovery between fixtures more than raw talent.',
+      'Belgium remain heavy favorites to win the group, but second-place props and “points total” markets on Iran are where the gossip meets the odds board. A side running on adrenaline through visa chaos often fades in the second and third group games when legs and sleep catch up.',
+    ]),
+    oddsList('wc4_odds', 'Group G — snapshot', [
+      {label: 'Belgium to win group', odds: '-220'},
+      {label: 'Iran to qualify (top 2)', odds: '+180'},
+      {label: 'Iran total group points O 3.5', odds: '+105'},
+      {label: 'Iran vs Egypt — Draw', odds: '+240'},
+    ]),
+    ...bullets('wc4_bul', [
+      'Track Iran travel news before each U.S.-based fixture — late arrivals compress training time.',
+      'Second and third group games are where travel fatigue historically shows up in xG differential.',
+      'Belgium -1.5 spreads in later Iran fixtures may inflate if the market overreacts to opener grit.',
+      'Under tickets in Iran’s third group match are a common sharp angle when rotation and fatigue collide.',
+    ]),
+    faqBlock('wc4_faq', 'Iran World Cup FAQ', [
+      {
+        question: 'Why does Iran train in Mexico?',
+        answer:
+          'The squad base is in Tijuana, crossing into the U.S. only for match days under strict entry-and-exit rules negotiated with tournament officials.',
+      },
+      {
+        question: 'Does travel chaos make Iran a fade in every game?',
+        answer:
+          'Not automatically — the opener proved they can compete — but cumulative fatigue makes second and third group fixtures the sharper fade spots.',
+      },
+    ]),
+    relatedArticles('wc4_rel', 'More World Cup coverage', [
+      RELATED.worldCupRankings,
+      RELATED.worldCupNeymar,
+      RELATED.worldCupMartinez,
     ]),
   ].filter(Boolean)
 }
@@ -598,6 +787,9 @@ export function buildPodcastBody(images) {
 export function buildArticleBodies(images) {
   return {
     worldCup: buildWorldCupBody(),
+    worldCupNeymar: buildWorldCupNeymarBody(),
+    worldCupMartinez: buildWorldCupMartinezBody(),
+    worldCupIran: buildWorldCupIranBody(),
     nfl: buildNflBody(images),
     nba: buildNbaBody(images),
     clv: buildClvBody(images),

@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-18T00:00:00.000Z",
+  "title": "Design System: BetOnline News",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "BetOnline Red",
+        "canonical": "oklch(62% 0.22 25)",
+        "tonalRamp": [
+          "oklch(22% 0.12 25)",
+          "oklch(32% 0.16 25)",
+          "oklch(42% 0.19 25)",
+          "oklch(52% 0.21 25)",
+          "oklch(62% 0.22 25)",
+          "oklch(72% 0.20 25)",
+          "oklch(82% 0.14 25)",
+          "oklch(92% 0.06 25)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Red Pressed",
+        "canonical": "oklch(58% 0.22 25)",
+        "tonalRamp": [
+          "oklch(20% 0.10 25)",
+          "oklch(30% 0.14 25)",
+          "oklch(40% 0.17 25)",
+          "oklch(50% 0.20 25)",
+          "oklch(58% 0.22 25)",
+          "oklch(68% 0.19 25)",
+          "oklch(78% 0.13 25)",
+          "oklch(88% 0.05 25)"
+        ]
+      },
+      "accent-green": {
+        "role": "secondary",
+        "displayName": "Join Green",
+        "canonical": "oklch(72% 0.20 130)",
+        "tonalRamp": [
+          "oklch(25% 0.08 130)",
+          "oklch(35% 0.12 130)",
+          "oklch(45% 0.15 130)",
+          "oklch(55% 0.18 130)",
+          "oklch(65% 0.20 130)",
+          "oklch(72% 0.20 130)",
+          "oklch(82% 0.14 130)",
+          "oklch(92% 0.06 130)"
+        ]
+      },
+      "nav-bg": {
+        "role": "neutral",
+        "displayName": "Nav Charcoal",
+        "canonical": "oklch(28% 0.005 120)",
+        "tonalRamp": [
+          "oklch(12% 0.003 120)",
+          "oklch(18% 0.004 120)",
+          "oklch(24% 0.005 120)",
+          "oklch(28% 0.005 120)",
+          "oklch(34% 0.005 120)",
+          "oklch(42% 0.004 120)",
+          "oklch(55% 0.003 120)",
+          "oklch(70% 0.002 120)"
+        ]
+      },
+      "sidebar-bg": {
+        "role": "neutral",
+        "displayName": "Sidebar Graphite",
+        "canonical": "oklch(30% 0 0)",
+        "tonalRamp": [
+          "oklch(14% 0 0)",
+          "oklch(20% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(36% 0 0)",
+          "oklch(44% 0 0)",
+          "oklch(58% 0 0)",
+          "oklch(75% 0 0)"
+        ]
+      },
+      "content-bg": {
+        "role": "neutral",
+        "displayName": "Reading White",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(20% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(60% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(88% 0 0)",
+          "oklch(96% 0 0)",
+          "oklch(100% 0 0)"
+        ]
+      },
+      "content-foreground": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(15% 0 0)",
+        "tonalRamp": [
+          "oklch(10% 0 0)",
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(40% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(96% 0 0)"
+        ]
+      },
+      "content-muted": {
+        "role": "neutral",
+        "displayName": "Muted Copy",
+        "canonical": "oklch(52% 0 0)",
+        "tonalRamp": [
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(52% 0 0)",
+          "oklch(62% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(82% 0 0)",
+          "oklch(92% 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Editorial Display",
+        "purpose": "Hero and article H1 headlines only. Source Serif 4."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Feed card titles and section headers. Serif via .news-headline."
+      },
+      "title": {
+        "displayName": "Widget Title",
+        "purpose": "Sub-section headings and widget labels. Figtree sans."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Article prose and UI copy. Max 42rem in long-form columns."
+      },
+      "label": {
+        "displayName": "Category Label",
+        "purpose": "Uppercase category kickers via .news-label — use sparingly."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-hover",
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        "purpose": "Article tiles and feed cards on hover only."
+      },
+      {
+        "name": "floating-panel",
+        "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+        "purpose": "Compose palette and block inspector overlays."
+      },
+      {
+        "name": "dropdown",
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 0 0 1px rgb(0 0 0 / 0.05)",
+        "purpose": "Header dropdown menus and shadcn popovers."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-chrome",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Sidebar width and header offset transitions — 200ms linear/ease-out."
+      },
+      {
+        "name": "spring-pill",
+        "value": "spring stiffness 400, damping 40",
+        "purpose": "Sub-nav active tab pill via framer-motion layoutId activeTab."
+      },
+      {
+        "name": "marquee-linear",
+        "value": "linear infinite 14s–40s",
+        "purpose": "Ticker marquees — disabled under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ],
+    "zIndex": [
+      { "name": "sub-nav", "value": 90 },
+      { "name": "header-sidebar", "value": 101 },
+      { "name": "dropdown-chrome", "value": 120 },
+      { "name": "compose-overlay", "value": 230 },
+      { "name": "mobile-drawer", "value": 100000 }
+    ]
+  },
+  "components": [
+    {
+      "name": "Join Button (Chrome)",
+      "kind": "button",
+      "refersTo": "button-join",
+      "description": "Primary conversion CTA in the fixed header.",
+      "html": "<button class=\"ds-btn-join\">Join</button>",
+      "css": ".ds-btn-join { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 12px; border: 1px solid #059669; border-radius: 6px; background-color: #059669; color: #ffffff; font-family: Figtree, system-ui, sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: background-color 0.2s, border-color 0.2s; } .ds-btn-join:hover { background-color: #10b981; border-color: #10b981; } .ds-btn-join:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 2px; }"
+    },
+    {
+      "name": "Login Button (Chrome)",
+      "kind": "button",
+      "refersTo": "button-ghost-chrome",
+      "description": "Secondary auth action in header — transparent with white border.",
+      "html": "<button class=\"ds-btn-login\">Login</button>",
+      "css": ".ds-btn-login { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 12px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; background-color: transparent; color: #ffffff; font-family: Figtree, system-ui, sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; } .ds-btn-login:hover { background-color: rgba(255,255,255,0.10); } .ds-btn-login:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 2px; }"
+    },
+    {
+      "name": "Sub-nav Active Pill",
+      "kind": "chip",
+      "refersTo": "subnav-pill-active",
+      "description": "Active tab indicator in the news sub-navigation pill bar.",
+      "html": "<div class=\"ds-subnav-track\"><button class=\"ds-subnav-tab ds-subnav-tab--active\">Latest</button><button class=\"ds-subnav-tab\">Picks</button></div>",
+      "css": ".ds-subnav-track { display: inline-flex; gap: 4px; padding: 2px; border-radius: 24px; background-color: rgba(255,255,255,0.05); } .ds-subnav-tab { position: relative; height: 36px; padding: 4px 16px; border: none; border-radius: 16px; background: transparent; color: rgba(255,255,255,0.70); font-family: Figtree, system-ui, sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: color 0.2s, background-color 0.2s; } .ds-subnav-tab:hover { background-color: rgba(255,255,255,0.05); color: #ffffff; } .ds-subnav-tab--active { background-color: #ee3536; color: #ffffff; } .ds-subnav-tab--active:hover { background-color: #dc2a2f; } .ds-subnav-tab:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 2px; }"
+    },
+    {
+      "name": "Sidebar Active Item",
+      "kind": "nav",
+      "refersTo": "sidebar-item-active",
+      "description": "Active navigation item in the collapsible sidebar.",
+      "html": "<nav class=\"ds-sidebar\"><a class=\"ds-sidebar-item ds-sidebar-item--active\" href=\"#\">Latest</a><a class=\"ds-sidebar-item\" href=\"#\">Expert Analysis</a></nav>",
+      "css": ".ds-sidebar { display: flex; flex-direction: column; gap: 4px; padding: 8px; background-color: #2d2d2d; width: 240px; } .ds-sidebar-item { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 6px; color: rgba(255,255,255,0.70); font-family: Figtree, system-ui, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color 0.2s, color 0.2s; } .ds-sidebar-item:hover { background-color: rgba(255,255,255,0.05); color: #ffffff; } .ds-sidebar-item--active { background-color: #ee3536; color: #ffffff; } .ds-sidebar-item--active:hover { background-color: #dc2a2f; } .ds-sidebar-item:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 2px; }"
+    },
+    {
+      "name": "News Article Card",
+      "kind": "card",
+      "refersTo": "card-news",
+      "description": "Standard feed tile in the content area — flat at rest, shadow on hover.",
+      "html": "<article class=\"ds-news-card\"><span class=\"ds-news-label\">NFL</span><h3 class=\"ds-news-headline\">Week 1 Opening Lines Shift After Preseason</h3><p class=\"ds-news-meta\">2 hours ago</p></article>",
+      "css": ".ds-news-card { padding: 16px; border-radius: 12px; border: 1px solid #e5e5e5; background-color: #ffffff; color: #0a0a0a; transition: box-shadow 0.2s; cursor: pointer; } .ds-news-card:hover { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); } .ds-news-label { display: block; margin-bottom: 8px; color: #ee3536; font-family: Figtree, system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; } .ds-news-headline { margin: 0 0 8px; font-family: \"Source Serif 4\", Georgia, serif; font-size: 1.125rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; } .ds-news-meta { margin: 0; color: #737373; font-family: Figtree, system-ui, sans-serif; font-size: 0.875rem; }"
+    },
+    {
+      "name": "Category Label",
+      "kind": "chip",
+      "refersTo": "button-primary",
+      "description": "Uppercase category kicker — red text, no background. Use sparingly.",
+      "html": "<span class=\"ds-category-label\">Expert Analysis</span>",
+      "css": ".ds-category-label { color: #ee3536; font-family: Figtree, system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Content Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action button inside the content area (shadcn default).",
+      "html": "<button class=\"ds-btn-primary\">Read More</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; height: 32px; padding: 0 10px; border: 1px solid transparent; border-radius: 10px; background-color: #0a0a0a; color: #ffffff; font-family: Figtree, system-ui, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background-color 0.2s, transform 0.1s; } .ds-btn-primary:hover { background-color: rgba(10,10,10,0.80); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(0,0,0,0.15); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Platform Frame",
+    "overview": "BetOnline News is editorial content delivered inside the BetOnline product shell — not a detached blog skin. The dark chrome (header, sidebar, sub-nav) is always on-brand and always dark; the content area beneath is a scoped reading surface that can be light or dark without breaking platform identity. Confidence comes from consistency with betonline.ag; premium comes from Source Serif headlines and careful reading rhythm inside a tool users already trust.",
+    "keyCharacteristics": [
+      "Dual-layer color: fixed dark chrome + theme-scoped content ([data-content-area])",
+      "Figtree for all UI; Source Serif 4 for headlines and editorial display only",
+      "Red accent (#ee3536) reserved for active nav, category labels, and primary CTAs — not decoration",
+      "Flat surfaces at rest; elevation appears only on hover or floating overlays",
+      "Collapsible sidebar (16rem expanded / 3rem icon rail) drives header and sub-nav offset",
+      "Reduced-motion alternatives for spring pill animation, marquees, and sidebar transitions"
+    ],
+    "rules": [
+      {
+        "name": "The Chrome Lock Rule",
+        "body": "Header, sidebar, and sub-nav never inherit content theme. They always render inside data-bol-chrome with dark --ds-nav-bg / --ds-sidebar-bg. Content light/dark toggle affects [data-content-area] only.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Voice Rule",
+        "body": "BetOnline Red appears on active navigation, category labels, and primary actions — ≤10% of any screen. If red is everywhere, it is nowhere.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif Boundary Rule",
+        "body": "Source Serif 4 stops at the content headline layer. Nav pills, sidebar items, buttons, form labels, and metadata are always Figtree.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Content cards ship with border + flat fill. Shadow is a hover affordance, not a permanent decoration.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do wrap every page in BolShell with --ds-* tokens and data-bol-chrome on header/sidebar.",
+      "Do scope light/dark content theme to [data-content-area] — chrome stays dark regardless.",
+      "Do use Source Serif 4 for headlines and Figtree for everything else in the UI layer.",
+      "Do use BetOnline Red for active nav state and category labels only — sparingly.",
+      "Do provide @media (prefers-reduced-motion: reduce) alternatives for spring animations, marquees, and sidebar transitions.",
+      "Do use full 1px borders on cards (--ds-content-card-border) — not colored side stripes.",
+      "Do match header/sub-nav left offset to sidebar width (16rem / 3rem) on desktop."
+    ],
+    "donts": [
+      "Don't ship a legacy WordPress news layout — white editorial column, text-only left nav, detached serif stack mimicking the old site.",
+      "Don't use generic AI blog templates — cream backgrounds, identical card grids, uppercase tracked eyebrows on every section.",
+      "Don't render detached CMS preview pages that ignore the BOL Shadcn shell from design-main.",
+      "Don't put Source Serif on nav labels, buttons, sidebar items, or metadata.",
+      "Don't use gradient text (background-clip: text) or side-stripe border accents on cards.",
+      "Don't apply glassmorphism to content cards — blur is for sub-nav chrome only.",
+      "Don't force min-h-screen on content wrappers — pages should end at content, not create phantom scroll.",
+      "Don't use arbitrary z-index values like 9999 outside the documented scale (sub-nav 90, header 101, overlays 120–230)."
+    ]
+  }
+}

@@ -5,7 +5,7 @@ import { BettingResourcesSection } from "@/components/news/betting-resources-sec
 import { ArticlePageRail } from "@/components/news/article-page-rail";
 import { ArticleTableOfContents } from "@/components/news/article-table-of-contents";
 import { PolitelyRawVideoLayout } from "@/components/news/politely-raw/politely-raw-video-layout";
-import { ScoreTicker } from "@/components/news/widgets/score-ticker";
+import { SportsCompetitionPanel } from "@/components/news/widgets/sports-competition-panel";
 import { EditorialArticleLayout } from "@/components/news/layouts/editorial-article-layout";
 import { extractArticleHeadings } from "@/lib/extract-article-headings";
 import { isPolitelyRawArticle } from "@/lib/politely-raw";
@@ -40,6 +40,9 @@ export function ArticlePageContent({
   const showToc = shouldShowTableOfContents(article);
   const headings = extractArticleHeadings(article.body);
   const politelyRaw = isPolitelyRawArticle(article);
+  const competitionSlug = article.categories?.find((c) =>
+    ["world-cup", "nfl", "nba", "nhl", "mlb"].includes(c.slug),
+  )?.slug;
 
   return (
     <BolShell
@@ -50,8 +53,6 @@ export function ArticlePageContent({
       )}
     >
       <div className="mx-auto w-full max-w-[1240px] px-4 py-8 md:px-8 lg:px-10">
-        {!politelyRaw ? <ScoreTicker className="mb-8" /> : null}
-
         {politelyRaw ? (
           <PolitelyRawVideoLayout
             article={article}
@@ -61,6 +62,13 @@ export function ArticlePageContent({
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_11rem] lg:gap-x-10 xl:grid-cols-[1fr_12rem] xl:gap-x-12">
             <div className="min-w-0 w-full">
               <EditorialArticleLayout article={article} variant={editorialVariant(article)} />
+              {competitionSlug ? (
+                <SportsCompetitionPanel
+                  leagueSlug={competitionSlug}
+                  className="mt-12"
+                  defaultTab="table"
+                />
+              ) : null}
               <BettingResourcesSection className="mt-16" />
             </div>
 
