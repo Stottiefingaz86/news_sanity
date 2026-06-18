@@ -31,8 +31,11 @@ import {
 import {
   isInTheNewsSection,
   isNavItemActive,
+  isNewsFeaturedItemActive,
   isNewsLeaguePath,
+  newsFeaturedItems,
   newsNavItems,
+  type NewsFeaturedItem,
   type NewsLeague,
 } from "@/lib/news-nav";
 import { cn } from "@/lib/utils";
@@ -53,6 +56,39 @@ function LeagueIcon({ league }: { league: NewsLeague }) {
       className="size-4 shrink-0 object-contain"
       decoding="sync"
     />
+  );
+}
+
+function FeatureNavIcon({
+  icon,
+  active,
+}: {
+  icon: NewsFeaturedItem["icon"];
+  active: boolean;
+}) {
+  const IconComp = typeof icon === "string" ? null : icon;
+
+  return (
+    <div
+      className={cn(
+        "flex size-7 shrink-0 items-center justify-center rounded-md",
+        active ? "bg-white/20" : "bg-white/10",
+      )}
+    >
+      {typeof icon === "string" ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={icon}
+          alt=""
+          className={cn(
+            "size-4 object-contain",
+            active && "brightness-0 invert",
+          )}
+        />
+      ) : IconComp ? (
+        <IconComp strokeWidth={1.5} className="size-4" />
+      ) : null}
+    </div>
   );
 }
 
@@ -186,11 +222,68 @@ export function BolSidebar() {
                 NEWS MENU
               </SidebarGroupLabel>
             )}
+            <SidebarGroupLabel className="px-2 py-1 text-xs uppercase tracking-wide text-white/50 group-data-[collapsible=icon]:hidden">
+              Features
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {newsFeaturedItems.map((feature) => {
+                  const active = isNewsFeaturedItemActive(pathname, feature);
+
+                  return (
+                    <SidebarMenuItem key={feature.slug}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <SidebarMenuButton
+                            asChild
+                            isActive={active}
+                            style={
+                              active
+                                ? {
+                                    backgroundColor: "var(--ds-primary, #ee3536)",
+                                  }
+                                : undefined
+                            }
+                            className={cn(
+                              "h-auto w-full cursor-pointer justify-start rounded-small px-3 py-2.5 text-sm font-medium",
+                              "focus-visible:outline-none focus-visible:ring-0",
+                              "data-[active=true]:font-medium data-[active=true]:text-white",
+                              "data-[active=false]:text-white/70 hover:bg-white/5 hover:text-white",
+                            )}
+                          >
+                            <Link href={feature.href} onClick={closeMobile}>
+                              <FeatureNavIcon icon={feature.icon} active={active} />
+                              <span className="group-data-[collapsible=icon]:hidden">
+                                {feature.label}
+                              </span>
+                            </Link>
+                          </SidebarMenuButton>
+                        </TooltipTrigger>
+                        {collapsed && (
+                          <TooltipContent
+                            side="right"
+                            className="border-white/10 bg-[#2d2d2d] text-white"
+                          >
+                            <p>{feature.label}</p>
+                          </TooltipContent>
+                        )}
+                      </Tooltip>
+                    </SidebarMenuItem>
+                  );
+                })}
+
+                <div className="mx-1 my-2 border-b border-white/10 group-data-[collapsible=icon]:hidden" />
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+
+          <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu>
                 {newsNavItems.map((item) => {
                   if (item.type === "link") {
-                    const Icon = item.icon;
+                    const IconComp =
+                      typeof item.icon === "string" ? null : item.icon;
                     const active = isNavItemActive(pathname, item.href);
 
                     return (
@@ -215,7 +308,16 @@ export function BolSidebar() {
                               )}
                             >
                               <Link href={item.href} onClick={closeMobile}>
-                                <Icon strokeWidth={1.5} className="size-5 shrink-0" />
+                                {typeof item.icon === "string" ? (
+                                  // eslint-disable-next-line @next/next/no-img-element
+                                  <img
+                                    src={item.icon}
+                                    alt=""
+                                    className="h-7 w-auto max-w-7 shrink-0 object-contain"
+                                  />
+                                ) : IconComp ? (
+                                  <IconComp strokeWidth={1.5} className="size-5 shrink-0" />
+                                ) : null}
                                 <span className="group-data-[collapsible=icon]:hidden">
                                   {item.label}
                                 </span>

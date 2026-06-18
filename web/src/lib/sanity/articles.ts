@@ -4,13 +4,17 @@ import {
   categoryBySlugQuery,
   categorySlugsQuery,
   homepageArticlesQuery,
+  politelyRawPageQuery,
+  politelyRawVideosExceptQuery,
 } from "@/lib/sanity/queries";
 import { dataset, projectId, sanityClient } from "@/lib/sanity/client";
+import { enrichManyWithRumbleMedia, enrichWithRumbleMedia } from "@/lib/rumble";
 import type {
   ArticleCard,
   ArticleDetail,
   CategoryPageData,
   HomepageArticles,
+  PolitelyRawPageData,
 } from "@/lib/sanity/types";
 
 const fetchOptions = { cache: "no-store" as const };
@@ -36,11 +40,14 @@ export async function getHomepageArticles(): Promise<HomepageArticles> {
 export async function getArticleBySlug(
   slug: string,
 ): Promise<ArticleDetail | null> {
-  return sanityClient.fetch<ArticleDetail | null>(
+  const article = await sanityClient.fetch<ArticleDetail | null>(
     articleBySlugQuery,
     { slug },
     fetchOptions,
   );
+
+  if (!article) return null;
+  return enrichWithRumbleMedia(article);
 }
 
 export async function getArticleSlugs(): Promise<string[]> {
@@ -59,6 +66,34 @@ export async function getCategoryPage(
 
 export async function getCategorySlugs(): Promise<string[]> {
   return sanityClient.fetch<string[]>(categorySlugsQuery, {}, fetchOptions);
+}
+
+export async function getPolitelyRawPage(): Promise<PolitelyRawPageData | null> {
+  const page = await sanityClient.fetch<PolitelyRawPageData | null>(
+    politelyRawPageQuery,
+    {},
+    fetchOptions,
+  );
+
+  if (!page) return null;
+
+  return {
+    ...page,
+    videos: await enrichManyWithRumbleMedia(page.videos ?? []),
+  };
+}
+
+export async function getPolitelyRawRelatedVideos(
+  slug: string,
+  limit = 8,
+): Promise<ArticleCard[]> {
+  const videos = await sanityClient.fetch<ArticleCard[]>(
+    politelyRawVideosExceptQuery,
+    { slug, limit },
+    fetchOptions,
+  );
+
+  return enrichManyWithRumbleMedia(videos ?? []);
 }
 
 export function getSanityConnectionInfo() {

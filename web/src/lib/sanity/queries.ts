@@ -113,3 +113,49 @@ export const categoryBySlugQuery = `*[
 }`;
 
 export const categorySlugsQuery = `*[_type == "category" && defined(slug.current)].slug.current`;
+
+export const politelyRawVideoProjection = `{
+  _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+  publishedAt,
+  layout,
+  heroMediaUrl,
+  mainImage {
+    ...,
+    asset->
+  },
+  author->{
+    name,
+    "slug": slug.current
+  },
+  categories[]->{
+    title,
+    "slug": slug.current
+  }
+}`;
+
+export const politelyRawPageQuery = `*[
+  _type == "category"
+  && slug.current == "politely-raw"
+][0]{
+  title,
+  "slug": slug.current,
+  description,
+  "videos": *[
+    ${publishedArticleFilter}
+    && references(^._id)
+  ] | order(publishedAt desc) ${politelyRawVideoProjection}
+}`;
+
+export const politelyRawVideosQuery = `*[
+  ${publishedArticleFilter}
+  && "politely-raw" in categories[]->slug.current
+] | order(publishedAt desc) ${politelyRawVideoProjection}`;
+
+export const politelyRawVideosExceptQuery = `*[
+  ${publishedArticleFilter}
+  && "politely-raw" in categories[]->slug.current
+  && slug.current != $slug
+] | order(publishedAt desc)[0...$limit] ${politelyRawVideoProjection}`;

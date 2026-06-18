@@ -2,7 +2,6 @@ import type { Icon } from "@tabler/icons-react";
 import {
   IconBook2,
   IconCalendarEvent,
-  IconHome,
   IconMicrophone,
   IconNews,
 } from "@tabler/icons-react";
@@ -13,6 +12,13 @@ export type NewsLeague = {
   slug: string;
   href: string;
   icon: string;
+};
+
+export type NewsFeaturedItem = {
+  label: string;
+  slug: string;
+  href: string;
+  icon: Icon | string;
 };
 
 export type NewsSectionNavItem = {
@@ -60,6 +66,16 @@ export const newsLeagues: NewsLeague[] = [
 const worldCupIcon = assetPath("/logos/world-cup-2026.svg");
 
 export const WORLD_CUP_NEWS_HREF = "/category/world-cup";
+
+/** Featured editorial links — mirrors BOL sports “Features” sidebar group. */
+export const newsFeaturedItems: NewsFeaturedItem[] = [
+  {
+    label: "World Cup 2026",
+    slug: "world-cup",
+    href: WORLD_CUP_NEWS_HREF,
+    icon: worldCupIcon,
+  },
+];
 
 /** Site-wide horizontal sub-nav — same items and order on every page. */
 export const newsSectionNavItems: NewsSectionNavItem[] = [
@@ -128,7 +144,7 @@ export type NewsNavLink = {
   type: "link";
   label: string;
   href: string;
-  icon: Icon;
+  icon: Icon | string;
 };
 
 export type NewsNavCollapsible = {
@@ -142,7 +158,6 @@ export type NewsNavCollapsible = {
 export type NewsNavItem = NewsNavLink | NewsNavCollapsible;
 
 export const newsNavItems: NewsNavItem[] = [
-  { type: "link", label: "Home", href: "/", icon: IconHome },
   {
     type: "collapsible",
     id: "in-the-news",
@@ -177,14 +192,20 @@ export function isNewsLeaguePath(pathname: string, slug: string) {
   );
 }
 
+export function isNewsFeaturedItemActive(pathname: string, item: NewsFeaturedItem) {
+  if (item.href === "/") {
+    return pathname === "/" || pathname === "";
+  }
+
+  return isNavItemActive(pathname, item.href);
+}
+
+export function isNewsFeaturedSection(pathname: string) {
+  return newsFeaturedItems.some((item) => isNewsFeaturedItemActive(pathname, item));
+}
+
 export function isInTheNewsSection(pathname: string) {
-  return (
-    pathname === "/category/news" ||
-    pathname.startsWith("/category/news/") ||
-    pathname === "/category/world-cup" ||
-    pathname.startsWith("/category/world-cup/") ||
-    newsLeagues.some((league) => isNewsLeaguePath(pathname, league.slug))
-  );
+  return newsLeagues.some((league) => isNewsLeaguePath(pathname, league.slug));
 }
 
 export function isNavItemActive(pathname: string, href: string) {

@@ -3,6 +3,7 @@ import { ArticleHeroImage } from "@/components/news/article-hero-image";
 import { ArticleMetaRow } from "@/components/news/article-meta-row";
 import { ArticleBodySection } from "@/components/news/article-body-section";
 import { ArticleSummaryBox } from "@/components/news/article-summary-box";
+import { getArticleVideoEmbedUrl } from "@/lib/video-embed";
 import type { ArticleDetail } from "@/lib/sanity/types";
 
 type EditorialArticleLayoutProps = {
@@ -10,29 +11,11 @@ type EditorialArticleLayoutProps = {
   variant?: "standard" | "analysis" | "media";
 };
 
-function getEmbedUrl(url?: string) {
-  if (!url) return null;
-
-  try {
-    const parsed = new URL(url);
-    if (parsed.hostname.includes("youtube.com") || parsed.hostname.includes("youtu.be")) {
-      const videoId = parsed.hostname.includes("youtu.be")
-        ? parsed.pathname.slice(1)
-        : parsed.searchParams.get("v");
-      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-    }
-  } catch {
-    return null;
-  }
-
-  return url;
-}
-
 export function EditorialArticleLayout({
   article,
   variant = "standard",
 }: EditorialArticleLayoutProps) {
-  const embedUrl = variant === "media" ? getEmbedUrl(article.heroMediaUrl) : null;
+  const embedUrl = variant === "media" ? getArticleVideoEmbedUrl(article) : null;
 
   return (
     <article className="min-w-0">

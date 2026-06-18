@@ -134,7 +134,7 @@ export const articleType = defineType({
       title: 'Hero media URL',
       type: 'url',
       group: 'layout',
-      description: 'Optional embed URL for media/show layout (YouTube, etc.).',
+      description: 'Watch URL for media/show layout (YouTube or Rumble). Used as the video embed on Politely RAW episodes.',
       hidden: ({ document }) => document?.layout !== 'media',
     }),
     defineField({

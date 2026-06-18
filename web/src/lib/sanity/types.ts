@@ -41,9 +41,19 @@ export type ArticleCard = {
   publishedAt?: string;
   layout?: ArticleLayout;
   featured?: boolean;
+  heroMediaUrl?: string;
+  rumbleEmbedUrl?: string;
+  rumbleThumbnailUrl?: string;
   mainImage?: SanityImage;
   author?: ArticleAuthor;
   categories?: ArticleCategory[];
+};
+
+export type PolitelyRawPageData = {
+  title: string;
+  slug: string;
+  description?: string;
+  videos: ArticleCard[];
 };
 
 export type ArticleDetail = ArticleCard & {

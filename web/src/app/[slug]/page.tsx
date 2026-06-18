@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticlePageContent } from "@/components/news/article-page-content";
-import { getArticleBySlug, getArticleSlugs } from "@/lib/sanity/articles";
+import { isPolitelyRawArticle } from "@/lib/politely-raw";
+import {
+  getArticleBySlug,
+  getArticleSlugs,
+  getPolitelyRawRelatedVideos,
+} from "@/lib/sanity/articles";
 import { getArticleImageUrl } from "@/lib/article-images";
 import { imageUrl } from "@/lib/sanity/image";
 import { getNewsSettings } from "@/lib/sanity/news-settings";
@@ -60,5 +65,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   if (!article) notFound();
 
-  return <ArticlePageContent article={article} settings={settings} />;
+  const relatedPolitelyRawVideos = isPolitelyRawArticle(article)
+    ? await getPolitelyRawRelatedVideos(slug, 6)
+    : [];
+
+  return (
+    <ArticlePageContent
+      article={article}
+      settings={settings}
+      relatedPolitelyRawVideos={relatedPolitelyRawVideos}
+    />
+  );
 }
