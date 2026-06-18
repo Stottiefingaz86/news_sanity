@@ -137,6 +137,21 @@
   --ring: oklch(0.556 0 0);
 }
 
+/* Mobile drawer: keep menu sharp — blur only the dimmed backdrop, never the panel */
+[data-vaul-overlay] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-vaul-drawer][data-mobile="true"],
+[data-sidebar="sidebar"][data-mobile="true"] {
+  z-index: 100000 !important;
+  isolation: isolate;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 /* Content-area emphasis tokens — always available (matches BOL sidebar grey) */
 [data-content-area] {
   --ds-content-emphasis-bg: #2d2d2d;

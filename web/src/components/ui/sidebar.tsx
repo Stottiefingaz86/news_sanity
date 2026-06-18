@@ -101,28 +101,6 @@ const SidebarProvider = React.forwardRef<
       })
     }, [])
 
-    // Lock body scroll when mobile drawer is open
-    React.useEffect(() => {
-      if (isMobile && openMobile) {
-        // Lock body scroll
-        document.body.style.overflow = 'hidden'
-        document.body.style.position = 'fixed'
-        document.body.style.width = '100%'
-      } else {
-        // Unlock body scroll
-        document.body.style.overflow = ''
-        document.body.style.position = ''
-        document.body.style.width = ''
-      }
-      
-      return () => {
-        // Cleanup on unmount
-        document.body.style.overflow = ''
-        document.body.style.position = ''
-        document.body.style.width = ''
-      }
-    }, [isMobile, openMobile])
-
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
     // If the user has previously toggled the sidebar, use their persisted preference;
@@ -319,7 +297,8 @@ const Sidebar = React.forwardRef<
                 color: 'white',
                 maxWidth: '320px',
                 width: '320px',
-                zIndex: 10001,
+                zIndex: 100000,
+                isolation: 'isolate',
                 backdropFilter: 'none',
                 WebkitBackdropFilter: 'none',
                 filter: 'none',

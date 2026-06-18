@@ -89,7 +89,7 @@ export function BolSidebar() {
       mobileOverlay
       mobileNoDrag
       mobileBg="#2d2d2d"
-      mobileOverlayClassName="!bg-black/30 !backdrop-blur-sm"
+      mobileOverlayClassName="!bg-black/40"
       className="!top-0 !z-[102] !h-screen border-r border-white/10 text-white !bg-[#2d2d2d] dark:!bg-[#2d2d2d] [&>div]:!bg-[#2d2d2d] dark:[&>div]:!bg-[#2d2d2d]"
     >
       <SidebarHeader
